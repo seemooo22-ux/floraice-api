@@ -11,13 +11,13 @@ module.exports = async (req, res) => {
   try {
     let prompt = '';
     if (type === 'products') {
-      prompt = 'Return a JSON array of 20 luxury perfume products for Floraice Boutique store (flr.sa). Brands: Creed, Amouage, Louis Vuitton, Maison Crivelli, Clive Christian, Sospiro, Ramon Bejar. Each product: {"id":number,"name":"Arabic name","price":{"amount":number,"currency":"SAR"},"status":"sale","description":"short Arabic description","emoji":"perfume emoji"}. Return ONLY the JSON array, no extra text.';
+      prompt = 'Return a JSON array of exactly 8 luxury perfume products for Floraice Boutique (flr.sa). Use these brands: Creed, Amouage, Louis Vuitton, Maison Crivelli. Each item must be: {"id":1,"name":"اسم عربي","price":{"amount":25,"currency":"SAR"},"status":"sale","description":"وصف"}. Return ONLY valid JSON array, nothing else.';
     } else if (type === 'categories') {
-      prompt = 'Return ONLY this JSON array for Floraice Boutique perfume store categories: [{"id":1,"name":"الكل"},{"id":2,"name":"عينات"},{"id":3,"name":"عطور كاملة"},{"id":4,"name":"نيش"},{"id":5,"name":"كريد"},{"id":6,"name":"أمواج"}]';
+      prompt = 'Return ONLY this exact JSON: [{"id":1,"name":"الكل"},{"id":2,"name":"عينات"},{"id":3,"name":"عطور كاملة"},{"id":4,"name":"نيش"},{"id":5,"name":"كريد"},{"id":6,"name":"أمواج"}]';
     }
     const message = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 2000,
+      max_tokens: 1500,
       messages: [{ role: 'user', content: prompt }],
     });
     const text = message.content[0].text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
