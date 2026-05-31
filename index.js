@@ -4,7 +4,21 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
   const { type } = req.query;
-  if (type === 'categories') return res.status(200).json({ success: true, data: [{"id":1,"name":"الكل"},{"id":2,"name":"عينات"},{"id":3,"name":"عطور كاملة"},{"id":4,"name":"نيش"},{"id":5,"name":"كريد"},{"id":6,"name":"أمواج"}] });
-  if (type === 'products') return res.status(200).json({ success: true, data: [{"id":2121438595,"name":"عينة رامون بيجار لوز انفينيتا","price":{"amount":21,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":436046934,"name":"عينة كريد وايلد فيتيفر","price":{"amount":42,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":567115796,"name":"عينة ريفلكشن 45 من امواج","price":{"amount":27,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1680387128,"name":"عينة ميزون كريفيلي عود ماراكوجا","price":{"amount":32,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1998935396,"name":"عينة عطر سوسبيرو فيبراتو","price":{"amount":20,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1400906076,"name":"عينة امواج جايدنس","price":{"amount":25,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1842738623,"name":"عينة كلايف كريستيان ماتسوكيتا","price":{"amount":46,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1148887940,"name":"عينة ايماجنيشن من لويس فيتون","price":{"amount":22,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1855509939,"name":"عطر أمواج اوتلاندس 100 مل","price":{"amount":1830,"currency":"SAR"},"status":"sale","thumbnail":null},{"id":1913120055,"name":"عطر سيكوينس من أمواج 100مل","price":{"amount":1880,"currency":"SAR"},"status":"sale","thumbnail":null}] });
+  if (type === 'categories') return res.status(200).json({ success: true, data: [
+    {id:1,name:'الكل'},{id:2,name:'عينات'},{id:3,name:'عطور كاملة'},
+    {id:4,name:'نيش'},{id:5,name:'كريد'},{id:6,name:'أمواج'}
+  ]});
+  if (type === 'products') return res.status(200).json({ success: true, data: [
+    {id:2121438595,name:'عينة رامون بيجار لوز انفينيتا',price:{amount:21,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:436046934,name:'عينة كريد وايلد فيتيفر',price:{amount:42,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:567115796,name:'عينة ريفلكشن 45 من امواج',price:{amount:27,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1680387128,name:'عينة ميزون كريفيلي عود ماراكوجا',price:{amount:32,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1998935396,name:'عينة عطر سوسبيرو فيبراتو',price:{amount:20,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1400906076,name:'عينة امواج جايدنس',price:{amount:25,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1842738623,name:'عينة كلايف كريستيان ماتسوكيتا',price:{amount:46,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1148887940,name:'عينة ايماجنيشن من لويس فيتون',price:{amount:22,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1855509939,name:'عطر أمواج اوتلاندس 100 مل',price:{amount:1830,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
+    {id:1913120055,name:'عطر سيكوينس من أمواج 100مل',price:{amount:1880,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'}
+  ]});
   res.status(400).json({ success: false, error: 'Invalid type' });
 };
