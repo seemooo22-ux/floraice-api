@@ -16,5 +16,9 @@ module.exports = async (req, res) => {
     const hasMore = start + PER_PAGE < ALL_PRODUCTS.length;
     return res.status(200).json({ success: true, data, page: pageNum, hasMore });
   }
+  if (type === 'product' && req.query.id) {
+    const product = ALL_PRODUCTS.find(p => String(p.id) === String(req.query.id));
+    return res.status(200).json({ success: true, data: product || null });
+  }
   res.status(400).json({ success: false, error: 'Invalid type' });
 };
