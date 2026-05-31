@@ -1,13 +1,62 @@
+const https = require('https');
+
+function sallaRequest(page, perPage) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: 'api.salla.dev',
+      path: `/admin/v2/products?status=sale&page=${page}&per_page=${perPage}&format=light`,
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${process.env.SALLA_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    };
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve(JSON.parse(data)));
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
-  const { type } = req.query;
+
+  const { type, page = '1' } = req.query;
+
   if (type === 'categories') return res.status(200).json({ success: true, data: [
     {id:1,name:'الكل'},{id:2,name:'عينات'},{id:3,name:'عطور كاملة'},{id:4,name:'نيش'},{id:5,name:'كريد'},{id:6,name:'أمواج'}
   ]});
-  if (type === 'products') return res.status(200).json({ success: true, data: [
+
+  if (type === 'products') {
+    if (!process.env.SALLA_TOKEN) {
+      return res.status(200).json({ success: true, data: staticProducts(), page: 1, hasMore: false });
+    }
+    try {
+      const result = await sallaRequest(parseInt(page), 20);
+      const products = (result.data || []).map(p => ({
+        id: p.id,
+        name: p.name,
+        price: p.prices?.price || {amount:0,currency:'SAR'},
+        status: p.status,
+        thumbnail: p.urls?.thumbnail || null
+      }));
+      return res.status(200).json({ success: true, data: products, page: parseInt(page), hasMore: products.length === 20 });
+    } catch(e) {
+      return res.status(200).json({ success: true, data: staticProducts(), page: 1, hasMore: false });
+    }
+  }
+
+  res.status(400).json({ success: false, error: 'Invalid type' });
+};
+
+function staticProducts() {
+  return [
     {id:2121438595,name:'عينة رامون بيجار لوز انفينيتا',price:{amount:21,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/1bb2eb72-a8ce-4be5-9231-ab248bf38742-500x500-gslRE9C964QqlQR2Nc4IUFPFWseiLLvWdEwMPzoh.png'},
     {id:436046934,name:'عينة كريد وايلد فيتيفر',price:{amount:42,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/79172d67-e3e1-430a-a65c-132a42ea9924-500x500-dXZ7FWa4HckYkMdTlTLGVpro3MjONkUJu8cNmVKJ.png'},
     {id:567115796,name:'عينة ريفلكشن 45 من امواج',price:{amount:27,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/2bcd99cb-2c70-4ac1-8ab8-da2c9af5714f-500x500-4oGMKr2BDc7qdOBXxuZKnlkTxA7OMnI3zhDxAI3k.png'},
@@ -18,6 +67,5 @@ module.exports = async (req, res) => {
     {id:1148887940,name:'عينة عطر ايماجنيشن من لويس فيتون',price:{amount:22,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/11e568a8-800d-4d44-8720-cdfe18c9774a-500x500-9jhEmIkRYvLbN9XSWBYNUQx5e5qlqLkEV5vjWpnU.png'},
     {id:1855509939,name:'عطر امواج اوتلاندس 100 مل',price:{amount:1830,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/9c32ad73-f926-4978-a4f5-6be7214c1235-333.39285714286x500-QYjWV1vACOYhUXf0G9UckaeckfBfjzaj2poI1Tnl.png'},
     {id:1913120055,name:'عطر سيكوينس من امواج 100مل',price:{amount:1880,currency:'SAR'},status:'sale',thumbnail:'https://cdn.salla.sa/nEVKAy/62710d56-ec62-45aa-85a6-650503e45c24-333.39285714286x500-N0GCbKZUUv0AHWq4HZGHk6cHT9PmItA2rp8Q9r59.png'}
-  ]});
-  res.status(400).json({ success: false, error: 'Invalid type' });
-};
+  ];
+}
