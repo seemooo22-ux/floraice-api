@@ -2,10 +2,14 @@
   "version": 2,
   "builds": [
     { "src": "index.js", "use": "@vercel/node" },
+    { "src": "auth.js", "use": "@vercel/node" },
+    { "src": "salla.js", "use": "@vercel/node" },
     { "src": "admin.html", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/admin", "dest": "/admin.html" },
+    { "src": "/auth/(.*)", "dest": "/auth.js" },
+    { "src": "/salla/(.*)", "dest": "/salla.js" },
     { "src": "/(.*)", "dest": "/index.js" }
   ]
 }
