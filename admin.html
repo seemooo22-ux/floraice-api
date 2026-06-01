@@ -6,289 +6,194 @@
 <title>فلورايس بوتيك · لوحة التحكم</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-:root {
-  --teal: #00B9AE;
-  --teal-light: #E8F9F8;
-  --teal-dark: #009990;
-  --dark: #1A1A2E;
-  --sidebar-w: 220px;
-  --topbar-h: 60px;
-  --gray: #6B7280;
-  --gray-light: #F3F4F6;
-  --border: #E5E7EB;
-  --text: #111827;
-  --text2: #6B7280;
-  --white: #ffffff;
-  --shadow: 0 1px 3px rgba(0,0,0,0.1);
-  --shadow2: 0 4px 16px rgba(0,0,0,0.12);
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --teal:#00B9AE;--teal-light:#E8F9F8;--teal-dark:#009990;
+  --border:#E5E7EB;--gray:#6B7280;--gray-light:#F3F4F6;
+  --text:#111827;--white:#fff;
+  --sidebar:220px;--topbar:60px;--preview:300px;
 }
+body{font-family:'Cairo',sans-serif;background:#F9FAFB;color:var(--text);min-height:100vh;}
 
-body { font-family: 'Cairo', sans-serif; background: #F9FAFB; color: var(--text); min-height: 100vh; }
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0C3547,#1A5276 50%,#0E6655);}
+.login-card{background:white;border-radius:20px;padding:48px 40px;width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.login-icon{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,#1a0a00,#2d1500);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px;}
+.login-name{font-size:22px;font-weight:700;}
+.login-en{font-size:13px;color:var(--gray);direction:ltr;}
+.login-badge{display:inline-block;background:var(--teal-light);color:var(--teal);border:1px solid var(--teal);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:600;margin:14px 0 22px;}
+.login-input{width:100%;padding:14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:'Cairo',sans-serif;text-align:center;letter-spacing:4px;margin-bottom:12px;transition:border-color .2s;}
+.login-input:focus{outline:none;border-color:var(--teal);}
+.login-btn{width:100%;padding:14px;background:var(--teal);color:white;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;}
+.login-btn:hover{background:var(--teal-dark);}
+.login-err{color:#EF4444;font-size:13px;margin-top:10px;min-height:18px;}
 
-/* ── LOGIN ── */
-.login-wrap {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #0C3547 0%, #1A5276 50%, #0E6655 100%);
-}
-.login-card {
-  background: white; border-radius: 20px; padding: 48px 40px;
-  width: 400px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.login-logo { margin-bottom: 24px; }
-.login-logo-img { width: 80px; height: 80px; border-radius: 20px; background: linear-gradient(135deg, #1a0a00, #2d1500); display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 12px; }
-.login-store-name { font-size: 22px; font-weight: 700; color: #1a0a00; }
-.login-store-en { font-size: 14px; color: #888; direction: ltr; }
-.login-badge { display: inline-block; background: var(--teal-light); color: var(--teal); border: 1px solid var(--teal); border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600; margin: 16px 0 24px; }
-.login-input {
-  width: 100%; padding: 14px 16px; border: 1.5px solid var(--border);
-  border-radius: 10px; font-size: 15px; font-family: 'Cairo', sans-serif;
-  text-align: center; letter-spacing: 4px; margin-bottom: 14px;
-  transition: border-color 0.2s;
-}
-.login-input:focus { outline: none; border-color: var(--teal); }
-.login-btn {
-  width: 100%; padding: 14px; background: var(--teal); color: white;
-  border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
-  font-family: 'Cairo', sans-serif; cursor: pointer; transition: background 0.2s;
-}
-.login-btn:hover { background: var(--teal-dark); }
-.login-err { color: #EF4444; font-size: 13px; margin-top: 10px; min-height: 20px; }
-
-/* ── DASHBOARD ── */
-.dash { display: none; min-height: 100vh; }
+/* DASHBOARD */
+.dash{display:none;min-height:100vh;}
 
 /* Topbar */
-.topbar {
-  position: fixed; top: 0; left: 0; right: 0; height: var(--topbar-h);
-  background: white; border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 20px 0 24px; z-index: 200; box-shadow: var(--shadow);
-}
-.topbar-right { display: flex; align-items: center; gap: 16px; }
-.topbar-logo { display: flex; align-items: center; gap: 10px; }
-.topbar-logo-icon { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg,#1a0a00,#2d1500); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-.topbar-logo-name { font-size: 15px; font-weight: 700; }
-.topbar-logo-en { font-size: 11px; color: var(--gray); direction: ltr; }
-.topbar-left { display: flex; align-items: center; gap: 12px; }
-.topbar-btn {
-  display: flex; align-items: center; gap: 6px; padding: 7px 14px;
-  border-radius: 8px; border: 1px solid var(--border); background: white;
-  font-size: 13px; font-weight: 600; font-family: 'Cairo', sans-serif;
-  cursor: pointer; color: var(--text2); transition: all 0.2s;
-}
-.topbar-btn:hover { border-color: var(--teal); color: var(--teal); }
-.topbar-btn.primary { background: var(--teal); color: white; border-color: var(--teal); }
-.topbar-btn.primary:hover { background: var(--teal-dark); }
-.store-visit { display: flex; align-items: center; gap: 6px; padding: 7px 14px; background: var(--teal-light); border: 1px solid var(--teal); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--teal); cursor: pointer; }
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar);background:white;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px 0 20px;z-index:300;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.tb-logo{display:flex;align-items:center;gap:10px;}
+.tb-logo-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#1a0a00,#2d1500);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.tb-logo-name{font-size:15px;font-weight:700;}
+.tb-logo-sub{font-size:11px;color:var(--gray);direction:ltr;}
+.tb-actions{display:flex;align-items:center;gap:10px;}
+.tb-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:white;font-size:13px;font-weight:600;font-family:'Cairo',sans-serif;cursor:pointer;color:var(--gray);transition:all .2s;}
+.tb-btn:hover{border-color:var(--teal);color:var(--teal);}
+.tb-btn.visit{background:var(--teal-light);border-color:var(--teal);color:var(--teal);}
 
 /* Sidebar */
-.sidebar {
-  position: fixed; right: 0; top: var(--topbar-h); bottom: 0;
-  width: var(--sidebar-w); background: white; border-left: 1px solid var(--border);
-  overflow-y: auto; z-index: 100; padding-bottom: 20px;
-}
-.sidebar-store { padding: 16px; border-bottom: 1px solid var(--border); text-align: center; }
-.sidebar-store-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg,#1a0a00,#2d1500); display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 8px; }
-.sidebar-store-name { font-size: 14px; font-weight: 700; }
-.sidebar-store-badge { display: inline-block; background: var(--teal); color: white; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; margin-top: 4px; }
+.sidebar{position:fixed;right:0;top:var(--topbar);bottom:0;width:var(--sidebar);background:white;border-left:1px solid var(--border);overflow-y:auto;z-index:200;}
+.sb-store{padding:14px 16px;border-bottom:1px solid var(--border);text-align:center;}
+.sb-store-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#1a0a00,#2d1500);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 6px;}
+.sb-store-name{font-size:13px;font-weight:700;}
+.sb-badge{display:inline-block;background:var(--teal);color:white;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;margin-top:3px;}
+.sb-sec{padding:10px 16px 4px;font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;}
+.sb-item{display:flex;align-items:center;gap:9px;padding:9px 16px;cursor:pointer;color:var(--gray);font-size:13px;font-weight:500;transition:all .15s;border-right:3px solid transparent;}
+.sb-item:hover{background:var(--gray-light);color:var(--text);}
+.sb-item.active{background:var(--teal-light);color:var(--teal);border-right-color:var(--teal);font-weight:600;}
+.sb-icon{font-size:15px;width:18px;text-align:center;}
+.sb-count{margin-right:auto;background:var(--teal);color:white;border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700;}
+.sb-new{margin-right:auto;background:#10B981;color:white;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;}
 
-.sb-group { padding: 8px 0; }
-.sb-group-title { padding: 8px 16px 4px; font-size: 11px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
-.sb-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 16px; cursor: pointer; color: var(--gray);
-  font-size: 13px; font-weight: 500; transition: all 0.15s;
-  border-right: 3px solid transparent;
-}
-.sb-item:hover { background: var(--gray-light); color: var(--text); }
-.sb-item.active { background: var(--teal-light); color: var(--teal); border-right-color: var(--teal); font-weight: 600; }
-.sb-icon { font-size: 16px; width: 20px; text-align: center; }
-.sb-badge { margin-right: auto; background: var(--teal); color: white; border-radius: 10px; padding: 1px 7px; font-size: 10px; font-weight: 700; }
-.sb-new { margin-right: auto; background: #10B981; color: white; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 700; }
+/* Layout */
+.main{margin-right:var(--sidebar);margin-top:var(--topbar);display:flex;min-height:calc(100vh - var(--topbar));}
+.content{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.settings-area{flex:1;overflow-y:auto;padding:20px;padding-left:20px;}
 
-/* Main Layout */
-.main {
-  margin-right: var(--sidebar-w); margin-top: var(--topbar-h);
-  display: flex; min-height: calc(100vh - var(--topbar-h));
-}
+/* Phone Preview - FIXED on left */
+.phone-sidebar{position:fixed;left:0;top:var(--topbar);bottom:0;width:var(--preview);background:white;border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:200;}
+.ph-header{padding:12px 16px;border-bottom:1px solid var(--border);}
+.ph-header-title{font-size:13px;font-weight:700;}
+.ph-header-sub{font-size:11px;color:var(--gray);margin-top:2px;}
+.ph-device{flex:1;display:flex;align-items:center;justify-content:center;background:#F3F4F6;padding:16px;}
+.phone-frame{width:180px;background:#111;border-radius:28px;padding:8px;box-shadow:0 16px 48px rgba(0,0,0,0.4),inset 0 0 0 1.5px #333;}
+.phone-notch{width:60px;height:18px;background:#111;border-radius:0 0 12px 12px;margin:0 auto 3px;position:relative;z-index:2;}
+.phone-screen{background:white;border-radius:20px;overflow:hidden;min-height:320px;}
+.phone-bar{width:60px;height:3px;background:#444;border-radius:4px;margin:6px auto 0;}
+.ph-refresh{margin:10px 16px;padding:9px;background:var(--teal-light);border:1px solid var(--teal);border-radius:8px;color:var(--teal);font-size:12px;font-weight:600;text-align:center;cursor:pointer;font-family:'Cairo',sans-serif;}
 
-/* Tab Bar */
-.tab-bar {
-  background: white; border-bottom: 1px solid var(--border);
-  display: flex; gap: 0; padding: 0 24px; overflow-x: auto;
-}
-.tab-item {
-  display: flex; align-items: center; gap: 6px; padding: 14px 16px;
-  font-size: 13px; font-weight: 500; color: var(--gray); cursor: pointer;
-  border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s;
-}
-.tab-item:hover { color: var(--teal); }
-.tab-item.active { color: var(--teal); border-bottom-color: var(--teal); font-weight: 600; }
+/* Content shifted for phone sidebar */
+.settings-area{margin-left:var(--preview);}
 
-/* Content + Preview Layout */
-.content-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-.content-body { flex: 1; display: flex; overflow: hidden; }
-.settings-panel { flex: 1; overflow-y: auto; padding: 24px; }
-.preview-panel {
-  width: 380px; background: white; border-right: 1px solid var(--border);
-  display: flex; flex-direction: column;
-}
-.preview-header-bar { padding: 14px 16px; border-bottom: 1px solid var(--border); }
-.preview-title { font-size: 13px; font-weight: 700; color: var(--text); }
-.preview-sub { font-size: 11px; color: var(--gray); margin-top: 2px; }
-.preview-device { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; background: #F3F4F6; }
-.phone-frame {
-  width: 240px; background: #111; border-radius: 36px; padding: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 0 0 2px #333;
-  position: relative;
-}
-.phone-notch { width: 80px; height: 24px; background: #111; border-radius: 0 0 16px 16px; margin: 0 auto 4px; position: relative; z-index: 2; }
-.phone-screen { background: white; border-radius: 24px; overflow: hidden; min-height: 420px; }
-.phone-bottom-bar { width: 80px; height: 4px; background: #444; border-radius: 4px; margin: 8px auto 0; }
-.preview-refresh-btn {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  margin: 12px 16px; padding: 10px; background: var(--teal-light); border: 1px solid var(--teal);
-  border-radius: 8px; color: var(--teal); font-size: 13px; font-weight: 600;
-  cursor: pointer; font-family: 'Cairo', sans-serif;
-}
+/* Tabs */
+.tab-bar{background:white;border-bottom:1px solid var(--border);display:flex;padding:0 20px;overflow-x:auto;flex-shrink:0;}
+.tab-item{display:flex;align-items:center;gap:5px;padding:13px 14px;font-size:13px;font-weight:500;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;}
+.tab-item:hover{color:var(--teal);}
+.tab-item.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:600;}
 
-/* Screen: Home */
-.ph-topbar { padding: 10px 12px 6px; display: flex; justify-content: space-between; align-items: center; }
-.ph-title { font-size: 13px; font-weight: 700; }
-.ph-icons { display: flex; gap: 8px; font-size: 14px; color: #555; }
-.ph-cats { display: flex; gap: 6px; padding: 4px 12px; overflow-x: auto; }
-.ph-cat { padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; background: #f0f0f0; color: #666; white-space: nowrap; }
-.ph-cat.active { color: white; }
-.ph-banner { margin: 8px 10px; border-radius: 12px; padding: 14px; }
-.ph-banner-tag { display: inline-block; background: rgba(255,255,255,0.2); color: white; border-radius: 20px; padding: 2px 8px; font-size: 9px; margin-bottom: 4px; }
-.ph-banner-title { color: white; font-size: 12px; font-weight: 700; }
-.ph-banner-sub { color: rgba(255,255,255,0.8); font-size: 9px; }
-.ph-products { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 10px; }
-.ph-product { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-.ph-prod-img { height: 70px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.ph-prod-info { padding: 6px 8px; }
-.ph-prod-name { font-size: 9px; font-weight: 600; color: #111; margin-bottom: 2px; line-height: 1.3; }
-.ph-prod-price { font-size: 10px; font-weight: 700; }
-.ph-bottom-nav { display: flex; border-top: 1px solid #eee; }
-.ph-nav-item { flex: 1; text-align: center; padding: 6px 4px; font-size: 8px; color: #888; }
-.ph-nav-item.active { color: var(--teal); }
-.ph-nav-icon { font-size: 14px; margin-bottom: 2px; }
-
-/* Settings Sections */
-.section-card { background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
-.section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.section-title { font-size: 15px; font-weight: 700; }
-.section-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
-.section-body { padding: 20px; }
-
-.setting-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
-.setting-row:last-child { border-bottom: none; }
-.setting-label { font-size: 13px; font-weight: 600; }
-.setting-desc { font-size: 11px; color: var(--gray); margin-top: 2px; }
-.setting-control { display: flex; align-items: center; gap: 8px; }
-
-/* Toggle */
-.toggle { position: relative; width: 40px; height: 22px; }
-.toggle input { opacity: 0; width: 0; height: 0; }
-.toggle-track { position: absolute; cursor: pointer; inset: 0; background: #D1D5DB; border-radius: 22px; transition: 0.25s; }
-.toggle-track:before { content: ''; position: absolute; width: 16px; height: 16px; right: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.25s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-input:checked + .toggle-track { background: var(--teal); }
-input:checked + .toggle-track:before { transform: translateX(-18px); }
-
-/* Color Input */
-.color-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.color-row:last-child { border-bottom: none; }
-.color-swatch-btn { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; background: white; }
-.color-dot { width: 20px; height: 20px; border-radius: 4px; }
-.color-hex { font-size: 12px; font-family: monospace; color: var(--text); }
-.color-label { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
-.color-input-hidden { position: absolute; opacity: 0; width: 0; height: 0; }
+/* Cards */
+.card{background:white;border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;}
+.card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.card-title{font-size:14px;font-weight:700;}
+.card-sub{font-size:11px;color:var(--gray);margin-top:2px;}
+.card-body{padding:18px;}
 
 /* Form */
-.form-group { margin-bottom: 14px; }
-.form-label { display: block; font-size: 12px; font-weight: 700; color: var(--gray); margin-bottom: 6px; }
-.form-input {
-  width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
-  border-radius: 8px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--text);
-  transition: border-color 0.2s;
-}
-.form-input:focus { outline: none; border-color: var(--teal); }
-.form-select { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--text); background: white; cursor: pointer; }
-.form-textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--text); min-height: 100px; resize: vertical; }
+.form-group{margin-bottom:12px;}
+.form-label{display:block;font-size:11px;font-weight:700;color:var(--gray);margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px;}
+.form-input{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Cairo',sans-serif;color:var(--text);transition:border-color .2s;}
+.form-input:focus{outline:none;border-color:var(--teal);}
+.form-select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Cairo',sans-serif;color:var(--text);background:white;cursor:pointer;}
+.form-textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Cairo',sans-serif;color:var(--text);min-height:90px;resize:vertical;}
 
-/* Design options grid */
-.design-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.design-option {
-  border: 2px solid var(--border); border-radius: 10px; padding: 12px; cursor: pointer;
-  text-align: center; transition: all 0.2s;
-}
-.design-option:hover { border-color: var(--teal); }
-.design-option.active { border-color: var(--teal); background: var(--teal-light); }
-.design-option-preview { height: 60px; border-radius: 6px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 6px; }
-.design-option-label { font-size: 11px; font-weight: 600; color: var(--text2); }
+/* Setting Row */
+.setting-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);}
+.setting-row:last-child{border-bottom:none;}
+.setting-label{font-size:13px;font-weight:600;}
+.setting-desc{font-size:11px;color:var(--gray);margin-top:2px;}
 
-/* Banner Cards */
-.banner-list { display: flex; flex-direction: column; gap: 10px; }
-.banner-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--gray-light); border-radius: 10px; border: 1px solid var(--border); }
-.banner-item-emoji { font-size: 28px; flex-shrink: 0; }
-.banner-item-info { flex: 1; }
-.banner-item-title { font-size: 14px; font-weight: 700; }
-.banner-item-sub { font-size: 12px; color: var(--gray); }
-.banner-item-tag { background: #FCD34D; color: #92400E; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-top: 4px; display: inline-block; }
-.banner-item-actions { display: flex; gap: 6px; }
+/* Toggle */
+.toggle{position:relative;width:40px;height:22px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-track{position:absolute;cursor:pointer;inset:0;background:#D1D5DB;border-radius:22px;transition:.25s;}
+.toggle-track:before{content:'';position:absolute;width:16px;height:16px;right:3px;bottom:3px;background:white;border-radius:50%;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+input:checked+.toggle-track{background:var(--teal);}
+input:checked+.toggle-track:before{transform:translateX(-18px);}
+
+/* Color */
+.color-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.color-row:last-child{border-bottom:none;}
+.color-label{font-size:13px;font-weight:500;flex:1;}
+.color-btn{display:flex;align-items:center;gap:7px;padding:5px 10px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;background:white;font-family:'Cairo',sans-serif;}
+.color-dot{width:20px;height:20px;border-radius:4px;border:1px solid rgba(0,0,0,.1);}
+.color-hex{font-size:11px;font-family:monospace;color:var(--text);}
+.color-hidden{position:absolute;opacity:0;width:0;height:0;}
+
+/* Design Options */
+.design-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.design-opt{border:2px solid var(--border);border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center;transition:all .2s;}
+.design-opt:hover{border-color:var(--teal);}
+.design-opt.active{border-color:var(--teal);background:var(--teal-light);}
+.design-opt-icon{font-size:22px;margin-bottom:5px;}
+.design-opt-label{font-size:11px;font-weight:600;color:var(--gray);}
+.design-opt.active .design-opt-label{color:var(--teal);}
 
 /* Buttons */
-.btn { padding: 8px 16px; border-radius: 8px; border: none; font-size: 13px; font-weight: 600; font-family: 'Cairo', sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; }
-.btn-teal { background: var(--teal); color: white; }
-.btn-teal:hover { background: var(--teal-dark); }
-.btn-outline { background: white; border: 1.5px solid var(--border); color: var(--gray); }
-.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
-.btn-danger { background: #FEE2E2; color: #EF4444; }
-.btn-danger:hover { background: #FECACA; }
-.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn{padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:600;font-family:'Cairo',sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s;}
+.btn-teal{background:var(--teal);color:white;}
+.btn-teal:hover{background:var(--teal-dark);}
+.btn-outline{background:white;border:1.5px solid var(--border);color:var(--gray);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-danger{background:#FEE2E2;color:#EF4444;}
+.btn-sm{padding:6px 12px;font-size:12px;}
 
 /* Table */
-.table-wrap { overflow: hidden; }
-table { width: 100%; border-collapse: collapse; }
-th { background: var(--gray-light); padding: 10px 16px; text-align: right; font-size: 11px; font-weight: 700; color: var(--gray); text-transform: uppercase; }
-td { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 13px; }
-tr:hover td { background: var(--teal-light); }
+table{width:100%;border-collapse:collapse;}
+th{background:var(--gray-light);padding:9px 14px;text-align:right;font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;}
+td{padding:11px 14px;border-top:1px solid var(--border);font-size:13px;}
+tr:hover td{background:var(--teal-light);}
+.badge-green{background:#D1FAE5;color:#065F46;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;}
 
-/* Badge */
-.badge { padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
-.badge-green { background: #D1FAE5; color: #065F46; }
-.badge-gray { background: var(--gray-light); color: var(--gray); }
+/* Banner item */
+.banner-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--gray-light);border-radius:10px;border:1px solid var(--border);margin-bottom:8px;}
+.bi-emoji{font-size:26px;flex-shrink:0;}
+.bi-info{flex:1;}
+.bi-title{font-size:13px;font-weight:700;}
+.bi-sub{font-size:11px;color:var(--gray);}
+.bi-tag{display:inline-block;background:#FCD34D;color:#92400E;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;margin-top:3px;}
 
-/* Status bar */
-.status-bar { display: flex; align-items: center; gap: 12px; padding: 12px 24px; background: white; border-bottom: 1px solid var(--border); }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; }
-.status-dot.green { background: #10B981; box-shadow: 0 0 6px #10B981; }
-.status-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray); }
+/* Phone screen components */
+.ph-topbar{padding:8px 10px;display:flex;justify-content:space-between;align-items:center;}
+.ph-store-title{font-size:11px;font-weight:700;}
+.ph-icons{font-size:12px;color:#666;}
+.ph-cats-row{display:flex;gap:5px;padding:3px 10px;overflow-x:auto;}
+.ph-cat{padding:3px 8px;border-radius:20px;font-size:9px;font-weight:600;background:#f0f0f0;color:#666;white-space:nowrap;}
+.ph-cat.sel{color:white;}
+.ph-banner{margin:6px 8px;border-radius:10px;padding:12px;}
+.ph-banner-tag-pill{display:inline-block;background:rgba(255,255,255,.2);color:white;border-radius:20px;padding:1px 6px;font-size:8px;margin-bottom:3px;}
+.ph-banner-title{color:white;font-size:11px;font-weight:700;}
+.ph-banner-sub{color:rgba(255,255,255,.75);font-size:9px;}
+.ph-prods{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 8px;}
+.ph-prod{background:white;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.ph-prod-img{height:56px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.ph-prod-info{padding:5px 6px;}
+.ph-prod-name{font-size:8px;font-weight:600;color:#111;line-height:1.3;}
+.ph-prod-price{font-size:9px;font-weight:700;margin-top:1px;}
+.ph-bottom{display:flex;border-top:1px solid #eee;background:white;}
+.ph-nav{flex:1;text-align:center;padding:5px 3px;font-size:7px;color:#888;}
+.ph-nav.sel{color:var(--teal);}
+.ph-nav-icon{font-size:12px;margin-bottom:1px;}
 
 /* Toast */
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #111; color: white; padding: 12px 24px; border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 9999; display: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;display:none;box-shadow:0 4px 20px rgba(0,0,0,.3);}
 
-/* Upload box */
-.upload-box { border: 2px dashed var(--border); border-radius: 10px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; }
-.upload-box:hover { border-color: var(--teal); background: var(--teal-light); }
-.upload-icon { font-size: 32px; margin-bottom: 8px; }
-.upload-text { font-size: 13px; color: var(--gray); }
-.upload-sub { font-size: 11px; color: #9CA3AF; margin-top: 4px; }
+/* State */
+.page{display:none;}
+.page.active{display:flex;flex-direction:column;flex:1;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
 </style>
 </head>
 <body>
-
 <div class="toast" id="toast"></div>
 
 <!-- LOGIN -->
 <div class="login-wrap" id="loginScreen">
   <div class="login-card">
-    <div class="login-logo">
-      <div class="login-logo-img">🌸</div>
-      <div class="login-store-name">فلورايس بوتيك</div>
-      <div class="login-store-en">Floraice Boutique</div>
-    </div>
+    <div class="login-icon">🌸</div>
+    <div class="login-name">فلورايس بوتيك</div>
+    <div class="login-en">Floraice Boutique</div>
     <div class="login-badge">Pro · لوحة التحكم</div>
     <input type="password" class="login-input" id="pwdInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
     <button class="login-btn" onclick="login()">دخول للوحة التحكم</button>
@@ -301,477 +206,404 @@ tr:hover td { background: var(--teal-light); }
 
   <!-- Topbar -->
   <div class="topbar">
-    <div class="topbar-right">
-      <div class="topbar-logo">
-        <div class="topbar-logo-icon">🌸</div>
-        <div>
-          <div class="topbar-logo-name">فلورايس بوتيك</div>
-          <div class="topbar-logo-en">Floraice Boutique</div>
+    <div class="tb-logo">
+      <div class="tb-logo-icon">🌸</div>
+      <div><div class="tb-logo-name">فلورايس بوتيك</div><div class="tb-logo-sub">Floraice Boutique</div></div>
+    </div>
+    <div class="tb-actions">
+      <div class="tb-btn visit" onclick="window.open('https://flr.sa','_blank')">← زيارة المتجر</div>
+      <button class="tb-btn" onclick="logout()">🚪 خروج</button>
+    </div>
+  </div>
+
+  <!-- Phone Sidebar (Fixed Left) -->
+  <div class="phone-sidebar">
+    <div class="ph-header">
+      <div class="ph-header-title">📱 معاينة التطبيق</div>
+      <div class="ph-header-sub">تتحدث مع كل تغيير</div>
+    </div>
+    <div class="ph-device">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ph-topbar" id="ph-topbar">
+            <div class="ph-icons">🔔 🔍</div>
+            <div class="ph-store-title" id="ph-name">فلورايس بوتيك</div>
+          </div>
+          <div class="ph-cats-row">
+            <div class="ph-cat sel" id="ph-cat0">الكل</div>
+            <div class="ph-cat">عينات</div>
+            <div class="ph-cat">نيش</div>
+            <div class="ph-cat">كريد</div>
+          </div>
+          <div class="ph-banner" id="ph-banner">
+            <div class="ph-banner-tag-pill" id="ph-tag">عرض خاص</div>
+            <div style="font-size:24px;margin:3px 0" id="ph-emoji">🌸</div>
+            <div class="ph-banner-title" id="ph-btitle">عطور النيش الأصيلة</div>
+            <div class="ph-banner-sub" id="ph-bsub">من أشهر الدور العالمية</div>
+          </div>
+          <div class="ph-prods">
+            <div class="ph-prod"><div class="ph-prod-img" id="ph-bg1" style="background:#f5ede0">🌸</div><div class="ph-prod-info"><div class="ph-prod-name">عينة كريد وايلد</div><div class="ph-prod-price" id="ph-price" style="color:#d4a94a">42 ر.س</div></div></div>
+            <div class="ph-prod"><div class="ph-prod-img" style="background:#e8f0f5">✨</div><div class="ph-prod-info"><div class="ph-prod-name">عينة أمواج</div><div class="ph-prod-price" id="ph-price2" style="color:#d4a94a">27 ر.س</div></div></div>
+            <div class="ph-prod"><div class="ph-prod-img" style="background:#f0ebe0">💎</div><div class="ph-prod-info"><div class="ph-prod-name">لويس فيتون</div><div class="ph-prod-price" id="ph-price3" style="color:#d4a94a">22 ر.س</div></div></div>
+            <div class="ph-prod"><div class="ph-prod-img" style="background:#ede8f0">👑</div><div class="ph-prod-info"><div class="ph-prod-name">كلايف كريستيان</div><div class="ph-prod-price" id="ph-price4" style="color:#d4a94a">46 ر.س</div></div></div>
+          </div>
+          <div class="ph-bottom" id="ph-bottom">
+            <div class="ph-nav sel" id="ph-nav0"><div class="ph-nav-icon">🏠</div>الرئيسية</div>
+            <div class="ph-nav"><div class="ph-nav-icon">📦</div>منتجات</div>
+            <div class="ph-nav"><div class="ph-nav-icon">🛒</div>سلة</div>
+            <div class="ph-nav"><div class="ph-nav-icon">👤</div>حساب</div>
+            <div class="ph-nav"><div class="ph-nav-icon">☰</div>المزيد</div>
+          </div>
         </div>
+        <div class="phone-bar"></div>
       </div>
     </div>
-    <div class="topbar-left">
-      <div class="store-visit" onclick="window.open('https://flr.sa','_blank')">
-        <span>زيارة المتجر</span> <span>←</span>
-      </div>
-      <button class="topbar-btn" onclick="logout()">🚪 خروج</button>
-    </div>
+    <button class="ph-refresh" onclick="toast('✅ تم تحديث المعاينة')">🔄 تحديث المعاينة</button>
   </div>
 
-  <!-- Sidebar -->
+  <!-- Sidebar Nav -->
   <div class="sidebar">
-    <div class="sidebar-store">
-      <div class="sidebar-store-icon">🌸</div>
-      <div class="sidebar-store-name">فلورايس بوتيك</div>
-      <div class="sidebar-store-badge">Pro</div>
+    <div class="sb-store">
+      <div class="sb-store-icon">🌸</div>
+      <div class="sb-store-name">فلورايس بوتيك</div>
+      <div class="sb-badge">Pro</div>
     </div>
-
-    <div class="sb-group">
-      <div class="sb-item active" onclick="sbNav('home',this)"><span class="sb-icon">🏠</span> الرئيسية</div>
-      <div class="sb-item" onclick="sbNav('products',this)"><span class="sb-icon">📦</span> المنتجات <span class="sb-badge" id="prod-badge">1438</span></div>
-      <div class="sb-item" onclick="sbNav('orders',this)"><span class="sb-icon">📋</span> الطلبات</div>
-      <div class="sb-item" onclick="sbNav('customers',this)"><span class="sb-icon">👥</span> العملاء</div>
-    </div>
-
-    <div class="sb-group">
-      <div class="sb-group-title">التطبيق</div>
-      <div class="sb-item" onclick="sbNav('design',this)"><span class="sb-icon">🎨</span> التصميم</div>
-      <div class="sb-item" onclick="sbNav('banners',this)"><span class="sb-icon">🖼</span> البانرات</div>
-      <div class="sb-item" onclick="sbNav('notifications',this)"><span class="sb-icon">🔔</span> الإشعارات</div>
-      <div class="sb-item" onclick="sbNav('categories',this)"><span class="sb-icon">📁</span> الأقسام</div>
-    </div>
-
-    <div class="sb-group">
-      <div class="sb-group-title">الإعدادات</div>
-      <div class="sb-item" onclick="sbNav('pages',this)"><span class="sb-icon">📄</span> الصفحات</div>
-      <div class="sb-item" onclick="sbNav('settings',this)"><span class="sb-icon">⚙️</span> الإعدادات</div>
-      <div class="sb-item" onclick="sbNav('login-page',this)"><span class="sb-icon">🔐</span> شاشة الدخول</div>
-    </div>
-
-    <div class="sb-group">
-      <div class="sb-item" onclick="sbNav('reports',this)"><span class="sb-icon">📊</span> التقارير</div>
-      <div class="sb-item" onclick="sbNav('faqs',this)"><span class="sb-icon">💬</span> الأسئلة والتقييمات</div>
-      <div class="sb-item" onclick="sbNav('marketing',this)"><span class="sb-icon">📣</span> الأدوات التسويقية</div>
-      <div class="sb-item" onclick="sbNav('channels',this)"><span class="sb-icon">🛒</span> قنوات البيع <span class="sb-new">جديد</span></div>
-    </div>
+    <div class="sb-sec">الرئيسية</div>
+    <div class="sb-item active" onclick="goPage('home',this)"><span class="sb-icon">🏠</span> الرئيسية</div>
+    <div class="sb-item" onclick="goPage('products',this)"><span class="sb-icon">📦</span> المنتجات <span class="sb-count" id="prod-badge">...</span></div>
+    <div class="sb-item" onclick="goPage('orders',this)"><span class="sb-icon">📋</span> الطلبات</div>
+    <div class="sb-item" onclick="goPage('customers',this)"><span class="sb-icon">👥</span> العملاء</div>
+    <div class="sb-sec">التطبيق</div>
+    <div class="sb-item" onclick="goPage('design',this)"><span class="sb-icon">🎨</span> التصميم</div>
+    <div class="sb-item" onclick="goPage('banners',this)"><span class="sb-icon">🖼</span> البانرات</div>
+    <div class="sb-item" onclick="goPage('notifications',this)"><span class="sb-icon">🔔</span> الإشعارات</div>
+    <div class="sb-item" onclick="goPage('categories',this)"><span class="sb-icon">📁</span> الأقسام</div>
+    <div class="sb-sec">الإعدادات</div>
+    <div class="sb-item" onclick="goPage('pages',this)"><span class="sb-icon">📄</span> الصفحات</div>
+    <div class="sb-item" onclick="goPage('settings',this)"><span class="sb-icon">⚙️</span> الإعدادات</div>
+    <div class="sb-item" onclick="goPage('loginpage',this)"><span class="sb-icon">🔐</span> شاشة الدخول</div>
+    <div class="sb-sec">أخرى</div>
+    <div class="sb-item" onclick="goPage('reports',this)"><span class="sb-icon">📊</span> التقارير</div>
+    <div class="sb-item" onclick="goPage('marketing',this)"><span class="sb-icon">📣</span> التسويق <span class="sb-new">جديد</span></div>
   </div>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <div class="main">
-    <div class="content-area">
+    <div class="content">
 
-      <!-- HOME PAGE -->
+      <!-- HOME -->
       <div class="page active" id="page-home">
         <div class="tab-bar">
-          <div class="tab-item active" onclick="switchTab(this,'home-main')">🏠 الصفحة الرئيسية</div>
-          <div class="tab-item" onclick="switchTab(this,'home-cats')">📁 التصنيفات</div>
-          <div class="tab-item" onclick="switchTab(this,'home-nav')">📌 الشريط العلوي والتبويبات</div>
-          <div class="tab-item" onclick="switchTab(this,'home-start')">🚀 شاشات البداية</div>
-          <div class="tab-item" onclick="switchTab(this,'home-product')">🏷 تفاصيل المنتج</div>
-          <div class="tab-item" onclick="switchTab(this,'home-general')">⚙️ إعدادات عامة</div>
+          <div class="tab-item active" onclick="switchTab(this,'ht-main')">🏠 الصفحة الرئيسية</div>
+          <div class="tab-item" onclick="switchTab(this,'ht-cats')">📁 التصنيفات</div>
+          <div class="tab-item" onclick="switchTab(this,'ht-nav')">📌 الشريط والتبويبات</div>
+          <div class="tab-item" onclick="switchTab(this,'ht-splash')">🚀 شاشات البداية</div>
+          <div class="tab-item" onclick="switchTab(this,'ht-product')">🏷 تفاصيل المنتج</div>
+          <div class="tab-item" onclick="switchTab(this,'ht-general')">⚙️ إعدادات عامة</div>
         </div>
-        <div class="status-bar">
-          <div class="status-item"><div class="status-dot green"></div> API يعمل</div>
-          <div class="status-item"><div class="status-dot green"></div> Vercel متصل</div>
-          <div class="status-item"><div class="status-dot green"></div> 1438 منتج</div>
-        </div>
-        <div class="content-body">
-          <div class="settings-panel">
+        <div class="settings-area">
 
-            <!-- home-main tab -->
-            <div class="tab-content active" id="tab-home-main">
-              <div class="section-card">
-                <div class="section-header">
-                  <div>
-                    <div class="section-title">البيانات المعروضة</div>
-                    <div class="section-sub">اختر البانرات التي ستظهر في الصفحة الرئيسية</div>
-                  </div>
-                  <button class="btn btn-teal btn-sm" onclick="savePage()">حفظ التصميم</button>
-                </div>
-                <div class="section-body">
-                  <div id="bannerSettingsList"></div>
-                  <button class="btn btn-outline btn-sm" onclick="sbNav('banners',null)">➕ إضافة بانر جديد</button>
-                </div>
-              </div>
-
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">خيارات تصميم المنتجات</div></div>
-                <div class="section-body">
-                  <div class="design-grid" id="prodDesignGrid">
-                    <div class="design-option active" onclick="selectDesign(this,'list')">
-                      <div class="design-option-preview">☰</div>
-                      <div class="design-option-label">قائمة</div>
-                    </div>
-                    <div class="design-option" onclick="selectDesign(this,'grid2')">
-                      <div class="design-option-preview">⊞</div>
-                      <div class="design-option-label">شبكة 2</div>
-                    </div>
-                    <div class="design-option" onclick="selectDesign(this,'grid3')">
-                      <div class="design-option-preview">⊟</div>
-                      <div class="design-option-label">شبكة 3</div>
-                    </div>
-                    <div class="design-option" onclick="selectDesign(this,'large')">
-                      <div class="design-option-preview">🖼</div>
-                      <div class="design-option-label">صورة كبيرة</div>
-                    </div>
-                    <div class="design-option" onclick="selectDesign(this,'compact')">
-                      <div class="design-option-preview">▤</div>
-                      <div class="design-option-label">مضغوط</div>
-                    </div>
-                    <div class="design-option" onclick="selectDesign(this,'magazine')">
-                      <div class="design-option-preview">📰</div>
-                      <div class="design-option-label">مجلة</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">مؤشر الانتقال</div></div>
-                <div class="section-body">
-                  <div class="setting-row">
-                    <div><div class="setting-label">عرض مؤشر الانتقال</div><div class="setting-desc">إظهار نقاط الانتقال بين البانرات</div></div>
-                    <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                  </div>
-                  <div class="setting-row">
-                    <div><div class="setting-label">التمرير التلقائي</div><div class="setting-desc">تغيير البانر تلقائياً كل 3 ثواني</div></div>
-                    <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                  </div>
+          <!-- Main Tab -->
+          <div class="tab-content active" id="ht-main">
+            <div class="card">
+              <div class="card-header"><div><div class="card-title">البانرات المعروضة</div><div class="card-sub">البانرات التي تظهر في الصفحة الرئيسية</div></div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+              <div class="card-body" id="home-banners-list"></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">خيارات تصميم المنتجات</div></div>
+              <div class="card-body">
+                <div class="design-opts">
+                  <div class="design-opt" onclick="selDesign(this,'list',1)"><div class="design-opt-icon">☰</div><div class="design-opt-label">قائمة</div></div>
+                  <div class="design-opt active" onclick="selDesign(this,'grid2',2)"><div class="design-opt-icon">⊞</div><div class="design-opt-label">شبكة 2</div></div>
+                  <div class="design-opt" onclick="selDesign(this,'grid3',3)"><div class="design-opt-icon">⊟</div><div class="design-opt-label">شبكة 3</div></div>
+                  <div class="design-opt" onclick="selDesign(this,'large',4)"><div class="design-opt-icon">🖼</div><div class="design-opt-label">صورة كبيرة</div></div>
+                  <div class="design-opt" onclick="selDesign(this,'compact',5)"><div class="design-opt-icon">▤</div><div class="design-opt-label">مضغوط</div></div>
+                  <div class="design-opt" onclick="selDesign(this,'magazine',6)"><div class="design-opt-icon">📰</div><div class="design-opt-label">مجلة</div></div>
                 </div>
               </div>
             </div>
-
-            <!-- home-cats tab -->
-            <div class="tab-content" id="tab-home-cats" style="display:none">
-              <div class="section-card">
-                <div class="section-header">
-                  <div><div class="section-title">تصميم عرض التصنيفات</div><div class="section-sub">اختر الشكل الذي سيظهر في شاشة التصنيفات</div></div>
-                </div>
-                <div class="section-body">
-                  <div class="design-grid">
-                    <div class="design-option" onclick="selectDesign(this,'cat-default')"><div class="design-option-preview">☰</div><div class="design-option-label">افتراضي</div></div>
-                    <div class="design-option active" onclick="selectDesign(this,'cat-custom')"><div class="design-option-preview">⊞</div><div class="design-option-label">مخصص</div></div>
-                  </div>
-                  <div class="setting-row" style="margin-top:16px">
-                    <div><div class="setting-label">نوع القائمة</div></div>
-                    <select class="form-select" style="width:auto">
-                      <option>افتراضي (التصنيفات)</option>
-                      <option>قائمة مخصصة</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">إدارة الأقسام</div></div>
-                <div class="section-body">
-                  <div id="catsSettingsList"></div>
-                  <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="sbNav('categories',null)">➕ إضافة قسم</button>
-                </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">مؤشر الانتقال</div></div>
+              <div class="card-body">
+                <div class="setting-row"><div><div class="setting-label">عرض مؤشر الانتقال</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div><div class="setting-label">التمرير التلقائي</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
               </div>
             </div>
-
-            <!-- home-nav tab -->
-            <div class="tab-content" id="tab-home-nav" style="display:none">
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">تبويبات التطبيق</div><div class="section-sub">التحكم بالتبويبات السفلية الخاصة بالتطبيق</div></div>
-                <div class="section-body">
-                  <div class="setting-row"><div class="setting-label">الرئيسية</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">التصنيفات</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">السلة</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">الحساب</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">وسائل التواصل</div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">الإشعارات</div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">الطلبات</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                </div>
-              </div>
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">الشريط العلوي</div></div>
-                <div class="section-body">
-                  <div class="setting-row"><div class="setting-label">إظهار زر البحث</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div class="setting-label">إظهار أيقونة الإشعارات</div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="color-row">
-                    <div class="color-label">لون الخلفية</div>
-                    <div class="color-swatch-btn" onclick="document.getElementById('nav-bg').click()">
-                      <div class="color-dot" id="nav-bg-dot" style="background:#1a0a00"></div>
-                      <span class="color-hex" id="nav-bg-val">#1a0a00</span>
-                    </div>
-                    <input type="color" id="nav-bg" class="color-input-hidden" value="#1a0a00" oninput="colorChange('nav-bg','nav-bg-dot','nav-bg-val');updatePhone()">
-                  </div>
-                  <div class="color-row">
-                    <div class="color-label">لون الأيقونات</div>
-                    <div class="color-swatch-btn" onclick="document.getElementById('nav-icon').click()">
-                      <div class="color-dot" id="nav-icon-dot" style="background:#d4a94a"></div>
-                      <span class="color-hex" id="nav-icon-val">#d4a94a</span>
-                    </div>
-                    <input type="color" id="nav-icon" class="color-input-hidden" value="#d4a94a" oninput="colorChange('nav-icon','nav-icon-dot','nav-icon-val');updatePhone()">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- home-general tab -->
-            <div class="tab-content" id="tab-home-general" style="display:none">
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">إعدادات عامة للتطبيق</div></div>
-                <div class="section-body">
-                  <div class="setting-row"><div><div class="setting-label">تفعيل الوضع الداكن</div><div class="setting-desc">السماح للمستخدم باختيار الوضع الداكن</div></div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div><div class="setting-label">عرض زر الإضافة للمفضلة</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div><div class="setting-label">لون التطبيق</div></div>
-                    <div class="color-swatch-btn" onclick="document.getElementById('app-color').click()">
-                      <div class="color-dot" id="app-color-dot" style="background:#d4a94a"></div>
-                      <span class="color-hex" id="app-color-val">#d4a94a</span>
-                    </div>
-                    <input type="color" id="app-color" class="color-input-hidden" value="#d4a94a" oninput="colorChange('app-color','app-color-dot','app-color-val');updatePhone()">
-                  </div>
-                  <div class="setting-row"><div><div class="setting-label">نوع خط التطبيق</div></div>
-                    <select class="form-select" style="width:160px"><option>خط سلة الافتراضي</option><option>Cairo</option><option>Tajawal</option></select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- other empty tabs -->
-            <div class="tab-content" id="tab-home-start" style="display:none">
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">شاشات البداية</div><div class="section-sub">شاشة البداية يتم عرضها كل مرة عند فتح التطبيق</div></div>
-                <div class="section-body">
-                  <div class="upload-box">
-                    <div class="upload-icon">🖼</div>
-                    <div class="upload-text">اسحب الصورة هنا أو اضغط للاختيار</div>
-                    <div class="upload-sub">JPG, PNG, JSON | 512×512 بكسل</div>
-                  </div>
-                  <div class="color-row" style="margin-top:14px">
-                    <div class="color-label">لون الخلفية</div>
-                    <div class="color-swatch-btn" onclick="document.getElementById('splash-bg').click()">
-                      <div class="color-dot" id="splash-bg-dot" style="background:#1a0a00"></div>
-                      <span class="color-hex" id="splash-bg-val">#1a0a00</span>
-                    </div>
-                    <input type="color" id="splash-bg" class="color-input-hidden" value="#1a0a00" oninput="colorChange('splash-bg','splash-bg-dot','splash-bg-val')">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-content" id="tab-home-product" style="display:none">
-              <div class="section-card">
-                <div class="section-header"><div class="section-title">تفاصيل المنتج</div></div>
-                <div class="section-body">
-                  <div class="setting-row"><div><div class="setting-label">عرض خيارات المنتج في شاشة منفصلة</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div><div class="setting-label">عرض العنوان الفرعي</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div><div class="setting-label">عرض العنوان الترويجي</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div><div class="setting-label">عرض الوسوم</div></div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
-                  <div class="setting-row"><div><div class="setting-label">حجم صورة المنتج في شاشة التفاصيل</div></div>
-                    <select class="form-select" style="width:160px"><option>كامل الصورة</option><option>نصف الشاشة</option></select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
 
-          <!-- Phone Preview -->
-          <div class="preview-panel">
-            <div class="preview-header-bar">
-              <div class="preview-title">📱 معاينة التطبيق</div>
-              <div class="preview-sub">تحديث فوري مع كل تغيير</div>
-            </div>
-            <div class="preview-device">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen" id="phoneScreen">
-                  <!-- Dynamic content -->
-                  <div class="ph-topbar" id="ph-topbar" style="background:#1a0a00">
-                    <div class="ph-icons" style="color:#d4a94a">🔔 🔍</div>
-                    <div class="ph-title" style="color:#d4a94a" id="ph-store-name">فلورايس بوتيك</div>
-                  </div>
-                  <div class="ph-cats">
-                    <div class="ph-cat active" id="ph-cat-active" style="background:#1a0a00;color:#d4a94a">الكل</div>
-                    <div class="ph-cat">عينات</div>
-                    <div class="ph-cat">نيش</div>
-                    <div class="ph-cat">كريد</div>
-                  </div>
-                  <div class="ph-banner" id="ph-banner" style="background:linear-gradient(135deg,#1a0a00,#2d1500)">
-                    <div class="ph-banner-tag">عرض خاص</div>
-                    <div style="font-size:28px">🌸</div>
-                    <div class="ph-banner-title">عطور النيش الأصيلة</div>
-                    <div class="ph-banner-sub">من أشهر الدور العالمية</div>
-                  </div>
-                  <div class="ph-products">
-                    <div class="ph-product">
-                      <div class="ph-prod-img" style="background:#f5ede0">🌸</div>
-                      <div class="ph-prod-info">
-                        <div class="ph-prod-name">عينة كريد وايلد</div>
-                        <div class="ph-prod-price" id="ph-price1" style="color:#d4a94a">42 ر.س</div>
-                      </div>
-                    </div>
-                    <div class="ph-product">
-                      <div class="ph-prod-img" style="background:#e8f0f5">✨</div>
-                      <div class="ph-prod-info">
-                        <div class="ph-prod-name">عينة أمواج</div>
-                        <div class="ph-prod-price" style="color:#d4a94a">27 ر.س</div>
-                      </div>
-                    </div>
-                    <div class="ph-product">
-                      <div class="ph-prod-img" style="background:#f0ebe0">💎</div>
-                      <div class="ph-prod-info">
-                        <div class="ph-prod-name">لويس فيتون</div>
-                        <div class="ph-prod-price" style="color:#d4a94a">22 ر.س</div>
-                      </div>
-                    </div>
-                    <div class="ph-product">
-                      <div class="ph-prod-img" style="background:#ede8f0">👑</div>
-                      <div class="ph-prod-info">
-                        <div class="ph-prod-name">كلايف كريستيان</div>
-                        <div class="ph-prod-price" style="color:#d4a94a">46 ر.س</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ph-bottom-nav" id="ph-bottom">
-                    <div class="ph-nav-item active" style="color:#d4a94a"><div class="ph-nav-icon">🏠</div>الرئيسية</div>
-                    <div class="ph-nav-item"><div class="ph-nav-icon">📦</div>منتجات</div>
-                    <div class="ph-nav-item"><div class="ph-nav-icon">🛒</div>سلة</div>
-                    <div class="ph-nav-item"><div class="ph-nav-icon">👤</div>حساب</div>
-                    <div class="ph-nav-item"><div class="ph-nav-icon">☰</div>المزيد</div>
-                  </div>
+          <!-- Cats Tab -->
+          <div class="tab-content" id="ht-cats">
+            <div class="card">
+              <div class="card-header"><div class="card-title">تصميم التصنيفات</div></div>
+              <div class="card-body">
+                <div class="design-opts" style="grid-template-columns:1fr 1fr;">
+                  <div class="design-opt active" onclick="selDesign(this,'cat-default',1)"><div class="design-opt-icon">☰</div><div class="design-opt-label">افتراضي</div></div>
+                  <div class="design-opt" onclick="selDesign(this,'cat-custom',2)"><div class="design-opt-icon">⊞</div><div class="design-opt-label">مخصص</div></div>
                 </div>
-                <div class="phone-bottom-bar"></div>
               </div>
             </div>
-            <button class="preview-refresh-btn" onclick="toast('✅ تم تحديث المعاينة')">🔄 تحديث شاشة المعاينة</button>
+            <div class="card">
+              <div class="card-header"><div class="card-title">الأقسام النشطة</div></div>
+              <div class="card-body" id="home-cats-list"></div>
+            </div>
           </div>
+
+          <!-- Nav Tab -->
+          <div class="tab-content" id="ht-nav">
+            <div class="card">
+              <div class="card-header"><div class="card-title">تبويبات التطبيق</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+              <div class="card-body">
+                <div class="setting-row"><div class="setting-label">الرئيسية</div><label class="toggle"><input type="checkbox" checked onchange="updateNavPreview()"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div class="setting-label">التصنيفات</div><label class="toggle"><input type="checkbox" checked onchange="updateNavPreview()"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div class="setting-label">السلة</div><label class="toggle"><input type="checkbox" checked onchange="updateNavPreview()"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div class="setting-label">الحساب</div><label class="toggle"><input type="checkbox" checked onchange="updateNavPreview()"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div class="setting-label">الإشعارات</div><label class="toggle"><input type="checkbox" onchange="updateNavPreview()"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div class="setting-label">الطلبات</div><label class="toggle"><input type="checkbox" checked onchange="updateNavPreview()"><span class="toggle-track"></span></label></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">ألوان الشريط العلوي</div></div>
+              <div class="card-body">
+                <div class="color-row">
+                  <div class="color-label">لون الخلفية</div>
+                  <div class="color-btn" onclick="document.getElementById('nav-bg').click()">
+                    <div class="color-dot" id="nav-bg-dot" style="background:#1a0a00"></div>
+                    <span class="color-hex" id="nav-bg-val">#1a0a00</span>
+                  </div>
+                  <input type="color" id="nav-bg" class="color-hidden" value="#1a0a00" oninput="updateColor('nav-bg');applyTopbarColor()">
+                </div>
+                <div class="color-row">
+                  <div class="color-label">لون النص والأيقونات</div>
+                  <div class="color-btn" onclick="document.getElementById('nav-fg').click()">
+                    <div class="color-dot" id="nav-fg-dot" style="background:#d4a94a"></div>
+                    <span class="color-hex" id="nav-fg-val">#d4a94a</span>
+                  </div>
+                  <input type="color" id="nav-fg" class="color-hidden" value="#d4a94a" oninput="updateColor('nav-fg');applyTopbarColor()">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Splash Tab -->
+          <div class="tab-content" id="ht-splash">
+            <div class="card">
+              <div class="card-header"><div class="card-title">شاشة البداية</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+              <div class="card-body">
+                <div style="border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;margin-bottom:14px">
+                  <div style="font-size:30px;margin-bottom:6px">🖼</div>
+                  <div style="font-size:13px;color:var(--gray)">اسحب الصورة أو اضغط للاختيار</div>
+                  <div style="font-size:11px;color:#9CA3AF;margin-top:3px">512×512 بكسل</div>
+                </div>
+                <div class="color-row">
+                  <div class="color-label">لون خلفية شاشة البداية</div>
+                  <div class="color-btn" onclick="document.getElementById('splash-c').click()">
+                    <div class="color-dot" id="splash-c-dot" style="background:#1a0a00"></div>
+                    <span class="color-hex" id="splash-c-val">#1a0a00</span>
+                  </div>
+                  <input type="color" id="splash-c" class="color-hidden" value="#1a0a00" oninput="updateColor('splash-c')">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Tab -->
+          <div class="tab-content" id="ht-product">
+            <div class="card">
+              <div class="card-header"><div class="card-title">إعدادات صفحة المنتج</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+              <div class="card-body">
+                <div class="setting-row"><div><div class="setting-label">عرض خيارات المنتج في شاشة منفصلة</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div><div class="setting-label">عرض العنوان الفرعي</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div><div class="setting-label">عرض العنوان الترويجي</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div><div class="setting-label">عرض الوسوم</div></div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div><div class="setting-label">حجم الصورة في التفاصيل</div></div>
+                  <select class="form-select" style="width:140px"><option>كامل الصورة</option><option>نصف الشاشة</option></select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- General Tab -->
+          <div class="tab-content" id="ht-general">
+            <div class="card">
+              <div class="card-header"><div class="card-title">إعدادات عامة</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+              <div class="card-body">
+                <div class="setting-row"><div><div class="setting-label">الوضع الداكن</div><div class="setting-desc">تفعيل الوضع الداكن للتطبيق</div></div><label class="toggle"><input type="checkbox" onchange="toggleDark(this.checked)"><span class="toggle-track"></span></label></div>
+                <div class="setting-row"><div><div class="setting-label">زر الإضافة للمفضلة</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+                <div class="color-row">
+                  <div class="color-label">لون التطبيق الرئيسي</div>
+                  <div class="color-btn" onclick="document.getElementById('app-c').click()">
+                    <div class="color-dot" id="app-c-dot" style="background:#d4a94a"></div>
+                    <span class="color-hex" id="app-c-val">#d4a94a</span>
+                  </div>
+                  <input type="color" id="app-c" class="color-hidden" value="#d4a94a" oninput="updateColor('app-c');applyAccentColor()">
+                </div>
+                <div class="setting-row"><div><div class="setting-label">نوع الخط</div></div>
+                  <select class="form-select" style="width:160px"><option>Cairo (افتراضي)</option><option>Tajawal</option><option>Noto Naskh</option></select>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- PRODUCTS PAGE -->
-      <div class="page" id="page-products">
-        <div class="tab-bar"><div class="tab-item active">📦 المنتجات</div></div>
-        <div class="status-bar"><span style="font-size:13px;color:var(--gray)" id="prod-status">جاري التحميل...</span></div>
-        <div class="settings-panel" style="max-width:100%">
-          <div class="section-card">
-            <div class="section-header">
-              <div class="section-title">قائمة المنتجات</div>
-              <input class="form-input" style="width:220px" placeholder="🔍 بحث..." oninput="filterProds(this.value)">
+      <!-- DESIGN -->
+      <div class="page" id="page-design">
+        <div class="tab-bar"><div class="tab-item active">🎨 التصميم والألوان</div></div>
+        <div class="settings-area">
+          <div class="card">
+            <div class="card-header"><div class="card-title">الألوان الرئيسية</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم حفظ الألوان')">حفظ</button></div>
+            <div class="card-body">
+              <div class="color-row">
+                <div class="color-label">اللون الأساسي (الهيدر والبانر)</div>
+                <div class="color-btn" onclick="document.getElementById('d-primary').click()">
+                  <div class="color-dot" id="d-primary-dot" style="background:#1a0a00"></div>
+                  <span class="color-hex" id="d-primary-val">#1a0a00</span>
+                </div>
+                <input type="color" id="d-primary" class="color-hidden" value="#1a0a00" oninput="updateColor('d-primary');applyPrimaryColor()">
+              </div>
+              <div class="color-row">
+                <div class="color-label">اللون الذهبي (الأسعار والأزرار)</div>
+                <div class="color-btn" onclick="document.getElementById('d-gold').click()">
+                  <div class="color-dot" id="d-gold-dot" style="background:#d4a94a"></div>
+                  <span class="color-hex" id="d-gold-val">#d4a94a</span>
+                </div>
+                <input type="color" id="d-gold" class="color-hidden" value="#d4a94a" oninput="updateColor('d-gold');applyAccentColor2()">
+              </div>
+              <div class="color-row">
+                <div class="color-label">خلفية التطبيق</div>
+                <div class="color-btn" onclick="document.getElementById('d-bg').click()">
+                  <div class="color-dot" id="d-bg-dot" style="background:#f5f5f5"></div>
+                  <span class="color-hex" id="d-bg-val">#f5f5f5</span>
+                </div>
+                <input type="color" id="d-bg" class="color-hidden" value="#f5f5f5" oninput="updateColor('d-bg');applyBgColor()">
+              </div>
+              <div class="color-row">
+                <div class="color-label">لون كروت المنتجات</div>
+                <div class="color-btn" onclick="document.getElementById('d-card').click()">
+                  <div class="color-dot" id="d-card-dot" style="background:#ffffff"></div>
+                  <span class="color-hex" id="d-card-val">#ffffff</span>
+                </div>
+                <input type="color" id="d-card" class="color-hidden" value="#ffffff" oninput="updateColor('d-card');applyCardColor()">
+              </div>
             </div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>المنتج</th><th>السعر</th><th>الحالة</th><th>إجراءات</th></tr></thead>
-                <tbody id="prodTable"><tr><td colspan="4" style="text-align:center;padding:40px;color:var(--gray)">⏳ جاري التحميل...</td></tr></tbody>
-              </table>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">اسم المتجر</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+            <div class="card-body">
+              <div class="form-group"><label class="form-label">الاسم العربي</label><input class="form-input" id="store-name-ar" value="فلورايس بوتيك" oninput="document.getElementById('ph-name').textContent=this.value"></div>
+              <div class="form-group"><label class="form-label">الاسم الإنجليزي</label><input class="form-input" value="Floraice Boutique"></div>
+              <div class="form-group"><label class="form-label">الشعار (إيموجي)</label><input class="form-input" value="🌸" style="font-size:20px;text-align:center"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- BANNERS PAGE -->
+      <!-- BANNERS -->
       <div class="page" id="page-banners">
         <div class="tab-bar"><div class="tab-item active">🖼 البانرات</div></div>
-        <div class="settings-panel">
-          <div class="section-card">
-            <div class="section-header">
-              <div><div class="section-title">البانرات النشطة</div><div class="section-sub">تظهر في الصفحة الرئيسية للتطبيق</div></div>
-              <button class="btn btn-teal btn-sm" onclick="showAddBanner()">➕ إضافة بانر</button>
-            </div>
-            <div class="section-body">
-              <div id="bannerList"></div>
-            </div>
+        <div class="settings-area">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">البانرات النشطة</div><div class="card-sub">تظهر في الصفحة الرئيسية</div></div><button class="btn btn-teal btn-sm" onclick="showAddBanner()">➕ إضافة</button></div>
+            <div class="card-body"><div id="banner-list"></div></div>
           </div>
-          <div class="section-card" id="addBannerCard" style="display:none">
-            <div class="section-header"><div class="section-title">بانر جديد</div></div>
-            <div class="section-body">
-              <div style="display:flex;gap:20px">
+          <div class="card" id="add-banner-card" style="display:none">
+            <div class="card-header"><div class="card-title">بانر جديد</div></div>
+            <div class="card-body">
+              <div style="display:flex;gap:16px">
                 <div style="flex:1">
-                  <div class="form-group"><label class="form-label">العنوان</label><input class="form-input" id="b-title" placeholder="عطور النيش الأصيلة" oninput="prevBanner()"></div>
-                  <div class="form-group"><label class="form-label">النص الفرعي</label><input class="form-input" id="b-sub" placeholder="من أشهر الدور العالمية" oninput="prevBanner()"></div>
+                  <div class="form-group"><label class="form-label">العنوان</label><input class="form-input" id="b-title" placeholder="عطور النيش" oninput="prevBanner()"></div>
+                  <div class="form-group"><label class="form-label">النص الفرعي</label><input class="form-input" id="b-sub" placeholder="من أشهر الدور" oninput="prevBanner()"></div>
                   <div class="form-group"><label class="form-label">التاق</label><input class="form-input" id="b-tag" placeholder="عرض خاص" oninput="prevBanner()"></div>
-                  <div class="form-group"><label class="form-label">الإيموجي</label><input class="form-input" id="b-emoji" placeholder="🌸" style="font-size:22px;text-align:center" oninput="prevBanner()"></div>
+                  <div class="form-group"><label class="form-label">الإيموجي</label><input class="form-input" id="b-emoji" placeholder="🌸" style="font-size:20px;text-align:center" oninput="prevBanner()"></div>
                 </div>
-                <div style="width:260px">
-                  <div style="font-size:12px;color:var(--gray);margin-bottom:8px;font-weight:600">معاينة</div>
-                  <div style="background:linear-gradient(135deg,#1a0a00,#2d1500);border-radius:14px;padding:20px">
-                    <div style="background:rgba(255,255,255,0.15);display:inline-block;color:white;padding:2px 10px;border-radius:20px;font-size:11px;margin-bottom:8px" id="bpTag">عرض خاص</div>
-                    <div style="font-size:36px;margin-bottom:6px" id="bpEmoji">🌸</div>
-                    <div style="color:white;font-size:15px;font-weight:700" id="bpTitle">العنوان</div>
-                    <div style="color:rgba(255,255,255,0.7);font-size:12px;margin-top:4px" id="bpSub">النص الفرعي</div>
+                <div style="width:200px">
+                  <div style="font-size:11px;color:var(--gray);margin-bottom:8px;font-weight:700;text-transform:uppercase">معاينة</div>
+                  <div style="background:linear-gradient(135deg,#1a0a00,#2d1500);border-radius:12px;padding:16px">
+                    <div style="background:rgba(255,255,255,.15);display:inline-block;color:white;padding:2px 8px;border-radius:20px;font-size:10px;margin-bottom:6px" id="bp-tag">عرض خاص</div>
+                    <div style="font-size:32px;margin-bottom:6px" id="bp-emoji">🌸</div>
+                    <div style="color:white;font-size:13px;font-weight:700" id="bp-title">العنوان</div>
+                    <div style="color:rgba(255,255,255,.7);font-size:11px;margin-top:3px" id="bp-sub">النص الفرعي</div>
                   </div>
                 </div>
               </div>
-              <div style="display:flex;gap:10px;margin-top:16px">
-                <button class="btn btn-teal" onclick="addBanner()">✅ إضافة</button>
-                <button class="btn btn-outline" onclick="document.getElementById('addBannerCard').style.display='none'">إلغاء</button>
+              <div style="display:flex;gap:8px;margin-top:14px">
+                <button class="btn btn-teal" onclick="addBanner()">✅ إضافة البانر</button>
+                <button class="btn btn-outline" onclick="document.getElementById('add-banner-card').style.display='none'">إلغاء</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- NOTIFICATIONS PAGE -->
+      <!-- NOTIFICATIONS -->
       <div class="page" id="page-notifications">
         <div class="tab-bar"><div class="tab-item active">🔔 الإشعارات</div></div>
-        <div class="content-body">
-          <div class="settings-panel">
-            <div class="section-card">
-              <div class="section-header"><div class="section-title">✍️ إنشاء إشعار جديد</div></div>
-              <div class="section-body">
-                <div class="form-group"><label class="form-label">عنوان الإشعار</label><input class="form-input" id="n-title" placeholder="🎉 عرض حصري!" oninput="prevNotif()"></div>
-                <div class="form-group"><label class="form-label">نص الإشعار</label><textarea class="form-textarea" id="n-body" placeholder="احصل على خصم 20% على جميع العينات..." oninput="prevNotif()"></textarea></div>
-                <div class="form-group"><label class="form-label">الفئة المستهدفة</label>
-                  <select class="form-select"><option>جميع المستخدمين</option><option>المستخدمون الجدد</option><option>العملاء النشطون</option></select>
+        <div class="settings-area" style="max-width:640px">
+          <div class="card">
+            <div class="card-header"><div class="card-title">إنشاء إشعار جديد</div></div>
+            <div class="card-body">
+              <div class="form-group"><label class="form-label">عنوان الإشعار</label><input class="form-input" id="n-title" placeholder="🎉 عرض حصري!" oninput="prevNotif()"></div>
+              <div class="form-group"><label class="form-label">نص الإشعار</label><textarea class="form-textarea" id="n-body" placeholder="احصل على خصم 20% على جميع العينات..." oninput="prevNotif()"></textarea></div>
+              <div class="form-group"><label class="form-label">الفئة المستهدفة</label><select class="form-select"><option>جميع المستخدمين</option><option>المستخدمون الجدد</option><option>العملاء النشطون</option></select></div>
+              <div style="background:var(--gray-light);border-radius:10px;padding:14px;margin-bottom:14px">
+                <div style="font-size:11px;color:var(--gray);margin-bottom:8px;font-weight:700">معاينة الإشعار في الجوال ←</div>
+                <div style="background:white;border-radius:10px;padding:12px;box-shadow:0 1px 6px rgba(0,0,0,.1)">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
+                    <div style="width:20px;height:20px;border-radius:5px;background:linear-gradient(135deg,#1a0a00,#2d1500);display:flex;align-items:center;justify-content:center;font-size:10px">🌸</div>
+                    <span style="font-size:11px;font-weight:600">فلورايس بوتيك</span>
+                    <span style="font-size:10px;color:var(--gray);margin-right:auto">الآن</span>
+                  </div>
+                  <div style="font-size:13px;font-weight:700" id="np-title">عنوان الإشعار</div>
+                  <div style="font-size:12px;color:#555;margin-top:3px;line-height:1.5" id="np-body">نص الإشعار...</div>
                 </div>
-                <div class="form-group"><label class="form-label">رابط الانتقال (اختياري)</label><input class="form-input" placeholder="https://flr.sa"></div>
-                <button class="btn btn-teal" onclick="sendNotif()" style="width:100%;justify-content:center">📤 إرسال الإشعار</button>
               </div>
+              <button class="btn btn-teal" style="width:100%;justify-content:center" onclick="sendNotif()">📤 إرسال الإشعار</button>
             </div>
           </div>
-          <div class="preview-panel">
-            <div class="preview-header-bar"><div class="preview-title">📱 معاينة الإشعار</div></div>
-            <div class="preview-device">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen" style="padding:16px;background:#f5f5f5">
-                  <div style="font-size:11px;color:#999;text-align:center;margin-bottom:16px">🔒 شاشة القفل</div>
-                  <div style="background:white;border-radius:14px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,0.1)">
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-                      <div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#1a0a00,#2d1500);display:flex;align-items:center;justify-content:center;font-size:12px">🌸</div>
-                      <span style="font-size:11px;font-weight:600;color:#333">فلورايس بوتيك</span>
-                      <span style="font-size:10px;color:#999;margin-right:auto">الآن</span>
-                    </div>
-                    <div style="font-size:13px;font-weight:700;color:#111" id="np-title">عنوان الإشعار</div>
-                    <div style="font-size:12px;color:#555;margin-top:4px;line-height:1.5" id="np-body">نص الإشعار يظهر هنا...</div>
-                  </div>
-                </div>
-                <div class="phone-bottom-bar"></div>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div class="page" id="page-categories">
+        <div class="tab-bar"><div class="tab-item active">📁 الأقسام</div></div>
+        <div class="settings-area">
+          <div class="card">
+            <div class="card-header"><div class="card-title">الأقسام</div><button class="btn btn-teal btn-sm" onclick="showAddCat()">➕ إضافة</button></div>
+            <div style="overflow:hidden">
+              <table><thead><tr><th>#</th><th>القسم</th><th>الإيموجي</th><th>إجراءات</th></tr></thead>
+              <tbody id="cat-table"></tbody></table>
+            </div>
+          </div>
+          <div class="card" id="add-cat-card" style="display:none">
+            <div class="card-header"><div class="card-title">قسم جديد</div></div>
+            <div class="card-body">
+              <div style="display:flex;gap:12px">
+                <div class="form-group" style="flex:1"><label class="form-label">اسم القسم</label><input class="form-input" id="cat-name" placeholder="نيش"></div>
+                <div class="form-group" style="width:90px"><label class="form-label">الإيموجي</label><input class="form-input" id="cat-emoji" placeholder="💎" style="font-size:20px;text-align:center"></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-teal" onclick="addCat()">✅ إضافة</button>
+                <button class="btn btn-outline" onclick="document.getElementById('add-cat-card').style.display='none'">إلغاء</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- CATEGORIES PAGE -->
-      <div class="page" id="page-categories">
-        <div class="tab-bar"><div class="tab-item active">📁 الأقسام</div></div>
-        <div class="settings-panel">
-          <div class="section-card">
-            <div class="section-header">
-              <div class="section-title">الأقسام</div>
-              <button class="btn btn-teal btn-sm" onclick="showAddCat()">➕ قسم جديد</button>
+      <!-- PRODUCTS -->
+      <div class="page" id="page-products">
+        <div class="tab-bar"><div class="tab-item active">📦 المنتجات</div></div>
+        <div class="settings-area">
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">المنتجات</div><div class="card-sub" id="prod-count-label">جاري التحميل...</div></div>
+              <input class="form-input" style="width:200px" placeholder="🔍 بحث..." oninput="filterProds(this.value)">
             </div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>#</th><th>القسم</th><th>الإيموجي</th><th>إجراءات</th></tr></thead>
-                <tbody id="catTable"></tbody>
-              </table>
-            </div>
-          </div>
-          <div class="section-card" id="addCatCard" style="display:none">
-            <div class="section-header"><div class="section-title">قسم جديد</div></div>
-            <div class="section-body">
-              <div style="display:flex;gap:12px">
-                <div class="form-group" style="flex:1"><label class="form-label">اسم القسم</label><input class="form-input" id="cat-name" placeholder="نيش"></div>
-                <div class="form-group" style="width:100px"><label class="form-label">الإيموجي</label><input class="form-input" id="cat-emoji" placeholder="💎" style="font-size:20px;text-align:center"></div>
-              </div>
-              <div style="display:flex;gap:10px">
-                <button class="btn btn-teal" onclick="addCat()">✅ إضافة</button>
-                <button class="btn btn-outline" onclick="document.getElementById('addCatCard').style.display='none'">إلغاء</button>
-              </div>
+            <div style="overflow:hidden">
+              <table><thead><tr><th>المنتج</th><th>السعر</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+              <tbody id="prod-table"><tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray)">⏳ جاري التحميل...</td></tr></tbody></table>
             </div>
           </div>
         </div>
@@ -780,10 +612,10 @@ tr:hover td { background: var(--teal-light); }
       <!-- PAGES -->
       <div class="page" id="page-pages">
         <div class="tab-bar"><div class="tab-item active">📄 الصفحات</div></div>
-        <div class="settings-panel">
-          <div class="section-card">
-            <div class="section-header"><div class="section-title">🏪 عن المتجر</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
-            <div class="section-body">
+        <div class="settings-area" style="max-width:800px">
+          <div class="card">
+            <div class="card-header"><div class="card-title">🏪 عن المتجر</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+            <div class="card-body">
               <div class="form-group"><label class="form-label">نبذة عن المتجر</label><textarea class="form-textarea" placeholder="فلورايس بوتيك، وجهتك للعطور النيش الفاخرة..."></textarea></div>
               <div style="display:flex;gap:12px">
                 <div class="form-group" style="flex:1"><label class="form-label">سنة التأسيس</label><input class="form-input" placeholder="2020"></div>
@@ -791,9 +623,9 @@ tr:hover td { background: var(--teal-light); }
               </div>
             </div>
           </div>
-          <div class="section-card">
-            <div class="section-header"><div class="section-title">📞 معلومات التواصل</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
-            <div class="section-body">
+          <div class="card">
+            <div class="card-header"><div class="card-title">📞 التواصل</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+            <div class="card-body">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
                 <div class="form-group"><label class="form-label">واتساب</label><input class="form-input" value="+966597209287"></div>
                 <div class="form-group"><label class="form-label">البريد الإلكتروني</label><input class="form-input" value="care@flr.sa"></div>
@@ -809,142 +641,51 @@ tr:hover td { background: var(--teal-light); }
 
       <!-- SETTINGS -->
       <div class="page" id="page-settings">
-        <div class="tab-bar"><div class="tab-item active">⚙️ الإعدادات العامة</div></div>
-        <div class="settings-panel">
-          <div class="section-card">
-            <div class="section-header"><div class="section-title">إعدادات التطبيق</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
-            <div class="section-body">
+        <div class="tab-bar"><div class="tab-item active">⚙️ الإعدادات</div></div>
+        <div class="settings-area" style="max-width:640px">
+          <div class="card">
+            <div class="card-header"><div class="card-title">إعدادات التطبيق</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
+            <div class="card-body">
               <div class="setting-row"><div><div class="setting-label">وضع الصيانة</div><div class="setting-desc">إيقاف التطبيق مؤقتاً</div></div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
               <div class="setting-row"><div><div class="setting-label">عرض الأسعار</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
               <div class="setting-row"><div><div class="setting-label">تفعيل السلة</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-              <div class="setting-row"><div><div class="setting-label">البحث في المنتجات</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+              <div class="setting-row"><div><div class="setting-label">البحث</div></div><label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
               <div class="setting-row"><div><div class="setting-label">التقييمات</div></div><label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label></div>
-              <div class="setting-row">
-                <div><div class="setting-label">العملة</div></div>
-                <select class="form-select" style="width:160px"><option>ريال سعودي (ر.س)</option><option>دولار ($)</option></select>
-              </div>
+              <div class="setting-row"><div><div class="setting-label">العملة</div></div><select class="form-select" style="width:160px"><option>ريال سعودي (ر.س)</option><option>دولار ($)</option></select></div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- LOGIN PAGE -->
-      <div class="page" id="page-login-page">
+      <div class="page" id="page-loginpage">
         <div class="tab-bar"><div class="tab-item active">🔐 شاشة الدخول</div></div>
-        <div class="content-body">
-          <div class="settings-panel">
-            <div class="section-card">
-              <div class="section-header"><div class="section-title">محتوى شاشة الدخول</div><button class="btn btn-teal btn-sm" onclick="toast('✅ تم الحفظ')">حفظ</button></div>
-              <div class="section-body">
-                <div class="form-group"><label class="form-label">عنوان الشاشة</label><input class="form-input" id="lp-title" value="فلورايس بوتيك" oninput="prevLogin()"></div>
-                <div class="form-group"><label class="form-label">النص الفرعي</label><input class="form-input" id="lp-sub" value="عطور نيش فاخرة" oninput="prevLogin()"></div>
-                <div class="form-group"><label class="form-label">نص زر الدخول</label><input class="form-input" id="lp-btn" value="تسجيل الدخول" oninput="prevLogin()"></div>
-                <div class="form-group"><label class="form-label">الشعار (إيموجي)</label><input class="form-input" id="lp-emoji" value="🌸" style="font-size:22px;text-align:center" oninput="prevLogin()"></div>
-              </div>
-            </div>
-            <div class="section-card">
-              <div class="section-header"><div class="section-title">🔑 كلمة مرور لوحة التحكم</div></div>
-              <div class="section-body">
-                <div class="form-group"><label class="form-label">كلمة المرور الجديدة</label><input class="form-input" type="password" id="lp-new" placeholder="كلمة مرور جديدة"></div>
-                <div class="form-group"><label class="form-label">تأكيد كلمة المرور</label><input class="form-input" type="password" id="lp-conf" placeholder="تأكيد"></div>
-                <button class="btn btn-outline" onclick="changePwd()" style="width:100%;justify-content:center">🔄 تغيير كلمة المرور</button>
-              </div>
+        <div class="settings-area" style="max-width:640px">
+          <div class="card">
+            <div class="card-header"><div class="card-title">تخصيص شاشة الدخول</div><button class="btn btn-teal btn-sm" onclick="applyLoginPreview();toast('✅ تم الحفظ')">حفظ</button></div>
+            <div class="card-body">
+              <div class="form-group"><label class="form-label">عنوان الشاشة</label><input class="form-input" id="lp-title" value="فلورايس بوتيك" oninput="applyLoginPreview()"></div>
+              <div class="form-group"><label class="form-label">النص الفرعي</label><input class="form-input" id="lp-sub" value="عطور نيش فاخرة" oninput="applyLoginPreview()"></div>
+              <div class="form-group"><label class="form-label">نص زر الدخول</label><input class="form-input" id="lp-btn" value="تسجيل الدخول" oninput="applyLoginPreview()"></div>
+              <div class="form-group"><label class="form-label">الشعار (إيموجي)</label><input class="form-input" id="lp-emoji" value="🌸" style="font-size:20px;text-align:center" oninput="applyLoginPreview()"></div>
             </div>
           </div>
-          <div class="preview-panel">
-            <div class="preview-header-bar"><div class="preview-title">📱 معاينة شاشة الدخول</div></div>
-            <div class="preview-device">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen" style="background:linear-gradient(135deg,#1a0a00,#2d1500);padding:32px 20px;text-align:center">
-                  <div id="lp-prev-emoji" style="font-size:52px;margin-bottom:12px">🌸</div>
-                  <div id="lp-prev-title" style="font-size:18px;font-weight:700;color:#d4a94a">فلورايس بوتيك</div>
-                  <div id="lp-prev-sub" style="font-size:12px;color:#888;margin-top:6px">عطور نيش فاخرة</div>
-                  <div style="background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:12px;margin:20px 0;color:#666;font-size:12px">رقم الجوال</div>
-                  <div id="lp-prev-btn" style="background:linear-gradient(135deg,#d4a94a,#e5ba5b);color:#000;padding:12px;border-radius:10px;font-weight:700;font-size:13px">تسجيل الدخول</div>
-                </div>
-                <div class="phone-bottom-bar"></div>
-              </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">🔑 كلمة مرور لوحة التحكم</div></div>
+            <div class="card-body">
+              <div class="form-group"><label class="form-label">كلمة المرور الجديدة</label><input class="form-input" type="password" id="lp-new" placeholder="كلمة مرور جديدة"></div>
+              <div class="form-group"><label class="form-label">تأكيد كلمة المرور</label><input class="form-input" type="password" id="lp-conf" placeholder="تأكيد"></div>
+              <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="changePwd()">🔄 تغيير كلمة المرور</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Other pages placeholder -->
-      <div class="page" id="page-orders"><div class="settings-panel"><div class="section-card"><div class="section-header"><div class="section-title">📋 الطلبات</div></div><div class="section-body" style="text-align:center;padding:40px;color:var(--gray)">متاح بعد ربط سلة Partners</div></div></div></div>
-      <div class="page" id="page-customers"><div class="settings-panel"><div class="section-card"><div class="section-header"><div class="section-title">👥 العملاء</div></div><div class="section-body" style="text-align:center;padding:40px;color:var(--gray)">متاح بعد ربط سلة Partners</div></div></div></div>
-      <div class="page" id="page-reports"><div class="settings-panel"><div class="section-card"><div class="section-header"><div class="section-title">📊 التقارير</div></div><div class="section-body" style="text-align:center;padding:40px;color:var(--gray)">متاح بعد ربط سلة Partners</div></div></div></div>
-      <div class="page" id="page-faqs"><div class="settings-panel"><div class="section-card"><div class="section-header"><div class="section-title">💬 الأسئلة والتقييمات</div></div><div class="section-body" style="text-align:center;padding:40px;color:var(--gray)">متاح قريباً</div></div></div></div>
-      <div class="page" id="page-marketing"><div class="settings-panel"><div class="section-card"><div class="section-header"><div class="section-title">📣 الأدوات التسويقية</div></div><div class="section-body" style="text-align:center;padding:40px;color:var(--gray)">متاح قريباً</div></div></div></div>
-      <div class="page" id="page-channels"><div class="settings-panel"><div class="section-card"><div class="section-header"><div class="section-title">🛒 قنوات البيع</div></div><div class="section-body" style="text-align:center;padding:40px;color:var(--gray)">متاح قريباً</div></div></div></div>
-
-      <!-- DESIGN PAGE -->
-      <div class="page" id="page-design">
-        <div class="tab-bar"><div class="tab-item active">🎨 التصميم والألوان</div></div>
-        <div class="content-body">
-          <div class="settings-panel">
-            <div class="section-card">
-              <div class="section-header"><div class="section-title">الألوان الرئيسية</div><button class="btn btn-teal btn-sm" onclick="saveDesign()">حفظ التصميم</button></div>
-              <div class="section-body">
-                <div class="color-row">
-                  <div class="color-label">اللون الأساسي (الهيدر)</div>
-                  <div class="color-swatch-btn" onclick="document.getElementById('dc-primary').click()">
-                    <div class="color-dot" id="dc-primary-dot" style="background:#1a0a00"></div>
-                    <span class="color-hex" id="dc-primary-val">#1a0a00</span>
-                  </div>
-                  <input type="color" id="dc-primary" class="color-input-hidden" value="#1a0a00" oninput="colorChange('dc-primary','dc-primary-dot','dc-primary-val');updatePhone()">
-                </div>
-                <div class="color-row">
-                  <div class="color-label">اللون الذهبي (الأسعار والأزرار)</div>
-                  <div class="color-swatch-btn" onclick="document.getElementById('dc-gold').click()">
-                    <div class="color-dot" id="dc-gold-dot" style="background:#d4a94a"></div>
-                    <span class="color-hex" id="dc-gold-val">#d4a94a</span>
-                  </div>
-                  <input type="color" id="dc-gold" class="color-input-hidden" value="#d4a94a" oninput="colorChange('dc-gold','dc-gold-dot','dc-gold-val');updatePhone()">
-                </div>
-                <div class="color-row">
-                  <div class="color-label">لون خلفية التطبيق</div>
-                  <div class="color-swatch-btn" onclick="document.getElementById('dc-bg').click()">
-                    <div class="color-dot" id="dc-bg-dot" style="background:#f5f5f5"></div>
-                    <span class="color-hex" id="dc-bg-val">#f5f5f5</span>
-                  </div>
-                  <input type="color" id="dc-bg" class="color-input-hidden" value="#f5f5f5" oninput="colorChange('dc-bg','dc-bg-dot','dc-bg-val')">
-                </div>
-              </div>
-            </div>
-            <div class="section-card">
-              <div class="section-header"><div class="section-title">اسم المتجر</div></div>
-              <div class="section-body">
-                <div class="form-group"><label class="form-label">الاسم العربي</label><input class="form-input" id="d-name" value="فلورايس بوتيك" oninput="document.getElementById('ph-store-name').textContent=this.value"></div>
-                <div class="form-group"><label class="form-label">الاسم الإنجليزي</label><input class="form-input" value="Floraice Boutique"></div>
-              </div>
-            </div>
-          </div>
-          <div class="preview-panel">
-            <div class="preview-header-bar"><div class="preview-title">📱 معاينة التطبيق</div></div>
-            <div class="preview-device">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen" id="phoneScreen2">
-                  <div class="ph-topbar" id="ph-topbar2" style="background:#1a0a00">
-                    <div class="ph-icons" style="color:#d4a94a">🔔 🔍</div>
-                    <div class="ph-title" style="color:#d4a94a" id="ph-store-name2">فلورايس بوتيك</div>
-                  </div>
-                  <div class="ph-banner" style="background:linear-gradient(135deg,#1a0a00,#2d1500);margin:8px 10px;border-radius:12px;padding:14px">
-                    <div class="ph-banner-title">عطور النيش الأصيلة</div>
-                    <div class="ph-banner-sub">من أشهر الدور العالمية</div>
-                  </div>
-                  <div class="ph-products">
-                    <div class="ph-product"><div class="ph-prod-img" style="background:#f5ede0">🌸</div><div class="ph-prod-info"><div class="ph-prod-name">عينة كريد</div><div class="ph-prod-price" id="ph-price2" style="color:#d4a94a">42 ر.س</div></div></div>
-                    <div class="ph-product"><div class="ph-prod-img" style="background:#e8f0f5">✨</div><div class="ph-prod-info"><div class="ph-prod-name">عينة أمواج</div><div class="ph-prod-price" style="color:#d4a94a">27 ر.س</div></div></div>
-                  </div>
-                </div>
-                <div class="phone-bottom-bar"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Placeholder pages -->
+      <div class="page" id="page-orders"><div class="settings-area"><div class="card"><div class="card-header"><div class="card-title">📋 الطلبات</div></div><div class="card-body" style="text-align:center;padding:40px;color:var(--gray)">متاح بعد ربط سلة Partners</div></div></div></div>
+      <div class="page" id="page-customers"><div class="settings-area"><div class="card"><div class="card-header"><div class="card-title">👥 العملاء</div></div><div class="card-body" style="text-align:center;padding:40px;color:var(--gray)">متاح بعد ربط سلة Partners</div></div></div></div>
+      <div class="page" id="page-reports"><div class="settings-area"><div class="card"><div class="card-header"><div class="card-title">📊 التقارير</div></div><div class="card-body" style="text-align:center;padding:40px;color:var(--gray)">متاح قريباً</div></div></div></div>
+      <div class="page" id="page-marketing"><div class="settings-area"><div class="card"><div class="card-header"><div class="card-title">📣 التسويق</div></div><div class="card-body" style="text-align:center;padding:40px;color:var(--gray)">متاح قريباً</div></div></div></div>
 
     </div>
   </div>
@@ -952,6 +693,17 @@ tr:hover td { background: var(--teal-light); }
 
 <script>
 const PASS = 'floraice2025';
+
+// State
+let state = {
+  primary: '#1a0a00',
+  accent: '#d4a94a',
+  bg: '#f5f5f5',
+  cardBg: '#ffffff',
+  storeName: 'فلورايس بوتيك',
+  darkMode: false,
+};
+
 let banners = [
   {id:1,title:'عطور النيش الأصيلة',sub:'من أشهر الدور العالمية',emoji:'🌸',tag:'عرض خاص'},
   {id:2,title:'عينات فاخرة',sub:'جرّب قبل أن تشتري',emoji:'✨',tag:'جديد'},
@@ -964,6 +716,7 @@ let cats = [
 ];
 let allProds = [];
 
+// LOGIN
 function login(){
   if(document.getElementById('pwdInput').value===PASS){
     document.getElementById('loginScreen').style.display='none';
@@ -973,146 +726,246 @@ function login(){
 }
 function logout(){document.getElementById('loginScreen').style.display='flex';document.getElementById('dashboard').style.display='none';document.getElementById('pwdInput').value='';}
 
+// TOAST
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
 
-function sbNav(page,el){
+// NAVIGATION
+function goPage(page,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
-  if(el) el.classList.add('active');
+  if(el)el.classList.add('active');
 }
 
-function switchTab(el, tabId){
-  const bar = el.parentElement;
+function switchTab(el,tabId){
+  const bar=el.closest('.tab-bar');
   bar.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  document.querySelectorAll('.tab-content').forEach(t=>t.style.display='none');
-  const tc = document.getElementById('tab-'+tabId);
-  if(tc) tc.style.display='block';
+  const page=el.closest('.page');
+  page.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  const tc=document.getElementById(tabId);
+  if(tc)tc.classList.add('active');
 }
 
-function init(){ renderBanners(); renderBannerSettings(); renderCats(); renderCatSettings(); loadProds(); }
+// INIT
+function init(){
+  renderBanners();renderCats();loadProds();
+  renderHomeBanners();renderHomeCats();
+  applyPhoneColors();
+}
 
+// PHONE PREVIEW UPDATES
+function applyTopbarColor(){
+  const bg=document.getElementById('nav-bg')?.value||state.primary;
+  const fg=document.getElementById('nav-fg')?.value||state.accent;
+  const tb=document.getElementById('ph-topbar');
+  if(tb){tb.style.background=bg;tb.querySelector('.ph-store-title').style.color=fg;tb.querySelector('.ph-icons').style.color=fg;}
+  const cat0=document.getElementById('ph-cat0');
+  if(cat0){cat0.style.background=bg;cat0.style.color=fg;}
+}
+
+function applyPrimaryColor(){
+  const c=document.getElementById('d-primary')?.value||'#1a0a00';
+  state.primary=c;
+  const banner=document.getElementById('ph-banner');
+  if(banner)banner.style.background=`linear-gradient(135deg,${c},${c}cc)`;
+  applyTopbarColor();
+}
+
+function applyAccentColor(){
+  const c=document.getElementById('app-c')?.value||'#d4a94a';
+  state.accent=c;
+  document.querySelectorAll('.ph-prod-price').forEach(el=>el.style.color=c);
+}
+function applyAccentColor2(){
+  const c=document.getElementById('d-gold')?.value||'#d4a94a';
+  state.accent=c;
+  document.querySelectorAll('.ph-prod-price').forEach(el=>el.style.color=c);
+}
+
+function applyBgColor(){
+  const c=document.getElementById('d-bg')?.value||'#f5f5f5';
+  state.bg=c;
+  document.querySelector('.phone-screen').style.background=c;
+}
+
+function applyCardColor(){
+  const c=document.getElementById('d-card')?.value||'#ffffff';
+  state.cardBg=c;
+  document.querySelectorAll('.ph-prod').forEach(el=>el.style.background=c);
+}
+
+function applyPhoneColors(){
+  applyTopbarColor();
+  applyPrimaryColor();
+  applyAccentColor();
+}
+
+function toggleDark(on){
+  const screen=document.querySelector('.phone-screen');
+  if(on){screen.style.background='#111';document.querySelectorAll('.ph-prod').forEach(el=>el.style.background='#1a1a1a');}
+  else{screen.style.background='#f5f5f5';document.querySelectorAll('.ph-prod').forEach(el=>el.style.background='#fff');}
+}
+
+function applyLoginPreview(){
+  const screen=document.querySelector('.phone-screen');
+  const primary=state.primary;
+  const accent=state.accent;
+  const title=document.getElementById('lp-title')?.value||'فلورايس بوتيك';
+  const sub=document.getElementById('lp-sub')?.value||'عطور نيش فاخرة';
+  const btn=document.getElementById('lp-btn')?.value||'تسجيل الدخول';
+  const emoji=document.getElementById('lp-emoji')?.value||'🌸';
+  screen.innerHTML=`
+    <div style="background:linear-gradient(135deg,${primary},${primary}cc);min-height:320px;padding:32px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font-size:44px;margin-bottom:10px">${emoji}</div>
+      <div style="font-size:15px;font-weight:700;color:${accent}">${title}</div>
+      <div style="font-size:11px;color:#888;margin-top:5px">${sub}</div>
+      <div style="background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:10px;margin:16px 0;color:#666;font-size:11px;width:100%">رقم الجوال</div>
+      <div style="background:linear-gradient(135deg,${accent},${accent}cc);color:#000;padding:10px;border-radius:8px;font-weight:700;font-size:12px;width:100%">${btn}</div>
+    </div>`;
+}
+
+function updateNavPreview(){toast('✅ تم تحديث التبويبات في المعاينة');}
+
+// COLOR HELPER
+function updateColor(id){
+  const val=document.getElementById(id).value;
+  const dot=document.getElementById(id+'-dot');
+  const label=document.getElementById(id+'-val');
+  if(dot)dot.style.background=val;
+  if(label)label.textContent=val;
+}
+
+// BANNERS
 function renderBanners(){
-  document.getElementById('bannerList').innerHTML = banners.map(b=>`
+  document.getElementById('banner-list').innerHTML=banners.map(b=>`
     <div class="banner-item">
-      <div class="banner-item-emoji">${b.emoji}</div>
-      <div class="banner-item-info">
-        <div class="banner-item-title">${b.title}</div>
-        <div class="banner-item-sub">${b.sub}</div>
-        <div class="banner-item-tag">${b.tag}</div>
+      <div class="bi-emoji">${b.emoji}</div>
+      <div class="bi-info">
+        <div class="bi-title">${b.title}</div>
+        <div class="bi-sub">${b.sub}</div>
+        <div class="bi-tag">${b.tag}</div>
       </div>
-      <div class="banner-item-actions">
-        <button class="btn btn-danger btn-sm" onclick="deleteBanner(${b.id})">🗑</button>
-      </div>
+      <button class="btn btn-danger btn-sm" onclick="delBanner(${b.id})">🗑</button>
     </div>
   `).join('');
+  renderHomeBanners();
+  updatePhoneBanner();
 }
 
-function renderBannerSettings(){
-  const el = document.getElementById('bannerSettingsList');
-  if(el) el.innerHTML = banners.map(b=>`
+function renderHomeBanners(){
+  const el=document.getElementById('home-banners-list');
+  if(!el)return;
+  el.innerHTML=banners.map(b=>`
     <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">
-      <span style="font-size:22px">${b.emoji}</span>
+      <span style="font-size:20px">${b.emoji}</span>
       <div style="flex:1"><div style="font-size:13px;font-weight:600">${b.title}</div><div style="font-size:11px;color:var(--gray)">${b.sub}</div></div>
       <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
     </div>
-  `).join('');
+  `).join('')+'<div style="height:8px"></div>';
 }
 
-function showAddBanner(){document.getElementById('addBannerCard').style.display='block';}
+function updatePhoneBanner(){
+  if(banners.length>0){
+    const b=banners[0];
+    const el=document.getElementById('ph-btitle');
+    const el2=document.getElementById('ph-bsub');
+    const el3=document.getElementById('ph-tag');
+    const el4=document.getElementById('ph-emoji');
+    if(el)el.textContent=b.title;
+    if(el2)el2.textContent=b.sub;
+    if(el3)el3.textContent=b.tag;
+    if(el4)el4.textContent=b.emoji;
+  }
+}
+
+function showAddBanner(){document.getElementById('add-banner-card').style.display='block';}
 function prevBanner(){
-  document.getElementById('bpTitle').textContent=document.getElementById('b-title').value||'العنوان';
-  document.getElementById('bpSub').textContent=document.getElementById('b-sub').value||'النص الفرعي';
-  document.getElementById('bpTag').textContent=document.getElementById('b-tag').value||'تاق';
-  document.getElementById('bpEmoji').textContent=document.getElementById('b-emoji').value||'🌸';
+  document.getElementById('bp-title').textContent=document.getElementById('b-title').value||'العنوان';
+  document.getElementById('bp-sub').textContent=document.getElementById('b-sub').value||'النص الفرعي';
+  document.getElementById('bp-tag').textContent=document.getElementById('b-tag').value||'تاق';
+  document.getElementById('bp-emoji').textContent=document.getElementById('b-emoji').value||'🌸';
 }
 function addBanner(){
   const t=document.getElementById('b-title').value;
   if(!t){toast('⚠️ أدخل العنوان');return;}
   banners.push({id:Date.now(),title:t,sub:document.getElementById('b-sub').value,emoji:document.getElementById('b-emoji').value||'🌸',tag:document.getElementById('b-tag').value||'جديد'});
-  renderBanners(); renderBannerSettings(); document.getElementById('addBannerCard').style.display='none'; toast('✅ تم إضافة البانر');
+  renderBanners();document.getElementById('add-banner-card').style.display='none';toast('✅ تم إضافة البانر');
 }
-function deleteBanner(id){banners=banners.filter(b=>b.id!==id);renderBanners();renderBannerSettings();toast('🗑 تم الحذف');}
+function delBanner(id){banners=banners.filter(b=>b.id!==id);renderBanners();toast('🗑 تم الحذف');}
 
+// CATS
 function renderCats(){
-  document.getElementById('catTable').innerHTML=cats.map((c,i)=>`
-    <tr><td style="color:var(--gray)">${i+1}</td><td style="font-weight:600">${c.name}</td><td style="font-size:20px">${c.emoji}</td>
-    <td><button class="btn btn-danger btn-sm" onclick="deleteCat(${c.id})">حذف</button></td></tr>
+  document.getElementById('cat-table').innerHTML=cats.map((c,i)=>`
+    <tr><td style="color:var(--gray)">${i+1}</td><td style="font-weight:600">${c.name}</td><td style="font-size:18px">${c.emoji}</td>
+    <td><button class="btn btn-danger btn-sm" onclick="delCat(${c.id})">حذف</button></td></tr>
   `).join('');
+  renderHomeCats();
 }
-function renderCatSettings(){
-  const el=document.getElementById('catsSettingsList');
-  if(el) el.innerHTML=cats.map(c=>`
+function renderHomeCats(){
+  const el=document.getElementById('home-cats-list');
+  if(!el)return;
+  el.innerHTML=cats.map(c=>`
     <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">
-      <span style="font-size:20px">${c.emoji}</span>
+      <span style="font-size:18px">${c.emoji}</span>
       <div style="flex:1;font-size:13px;font-weight:600">${c.name}</div>
       <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
     </div>
   `).join('');
 }
-function showAddCat(){document.getElementById('addCatCard').style.display='block';}
+function showAddCat(){document.getElementById('add-cat-card').style.display='block';}
 function addCat(){
   const n=document.getElementById('cat-name').value;
   if(!n){toast('⚠️ أدخل الاسم');return;}
   cats.push({id:Date.now(),name:n,emoji:document.getElementById('cat-emoji').value||'📦'});
-  renderCats();renderCatSettings();document.getElementById('addCatCard').style.display='none';toast('✅ تم إضافة القسم');
+  renderCats();document.getElementById('add-cat-card').style.display='none';toast('✅ تم إضافة القسم');
 }
-function deleteCat(id){cats=cats.filter(c=>c.id!==id);renderCats();renderCatSettings();toast('🗑 تم الحذف');}
+function delCat(id){cats=cats.filter(c=>c.id!==id);renderCats();toast('🗑 تم الحذف');}
 
+// PRODUCTS
 async function loadProds(){
   try{
     let p=1,has=true;
     while(has&&p<=5){const r=await fetch(`https://floraice-api.vercel.app?type=products&page=${p}`);const d=await r.json();allProds=[...allProds,...(d.data||[])];has=d.hasMore;p++;}
-    document.getElementById('prod-status').textContent=`${allProds.length} منتج`;
+    document.getElementById('prod-count-label').textContent=`${allProds.length} منتج`;
     document.getElementById('prod-badge').textContent=allProds.length;
     renderProds(allProds);
-  }catch(e){document.getElementById('prod-status').textContent='خطأ في التحميل';}
+  }catch(e){document.getElementById('prod-count-label').textContent='خطأ في التحميل';}
 }
 function renderProds(prods){
-  document.getElementById('prodTable').innerHTML=prods.slice(0,100).map(p=>`
+  document.getElementById('prod-table').innerHTML=prods.slice(0,100).map(p=>`
     <tr>
       <td><div style="display:flex;align-items:center;gap:10px">
-        ${p.thumbnail?`<img src="${p.thumbnail}" style="width:40px;height:40px;border-radius:8px;object-fit:cover" onerror="this.style.display='none'">`:'<div style="width:40px;height:40px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center">🌸</div>'}
-        <span style="font-size:13px;font-weight:500">${p.name}</span>
+        ${p.thumbnail?`<img src="${p.thumbnail}" style="width:38px;height:38px;border-radius:7px;object-fit:cover" onerror="this.style.display='none'">`:'<div style="width:38px;height:38px;border-radius:7px;background:#f0f0f0;display:flex;align-items:center;justify-content:center">🌸</div>'}
+        <span style="font-size:13px">${p.name}</span>
       </div></td>
       <td style="color:#065F46;font-weight:700">${p.price?.amount} ر.س</td>
-      <td><span class="badge badge-green">متاح</span></td>
+      <td><span class="badge-green">متاح</span></td>
       <td><button class="btn btn-outline btn-sm">تعديل</button></td>
     </tr>
   `).join('');
 }
 function filterProds(q){renderProds(allProds.filter(p=>p.name?.toLowerCase().includes(q.toLowerCase())));}
 
+// NOTIFICATIONS
 function prevNotif(){
   document.getElementById('np-title').textContent=document.getElementById('n-title').value||'عنوان الإشعار';
-  document.getElementById('np-body').textContent=document.getElementById('n-body').value||'نص الإشعار يظهر هنا...';
+  document.getElementById('np-body').textContent=document.getElementById('n-body').value||'نص الإشعار...';
 }
 function sendNotif(){const t=document.getElementById('n-title').value;if(!t){toast('⚠️ أدخل العنوان');return;}toast('✅ تم إرسال الإشعار');}
 
-function colorChange(inputId, dotId, valId){
-  const val=document.getElementById(inputId).value;
-  document.getElementById(dotId).style.background=val;
-  document.getElementById(valId).textContent=val;
+// DESIGN OPTS
+function selDesign(el,type,cols){
+  el.closest('.design-opts').querySelectorAll('.design-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  // Update phone grid
+  if(cols&&cols===1){document.querySelector('.ph-prods').style.gridTemplateColumns='1fr';}
+  else if(cols&&cols===3){document.querySelector('.ph-prods').style.gridTemplateColumns='1fr 1fr 1fr';}
+  else{document.querySelector('.ph-prods').style.gridTemplateColumns='1fr 1fr';}
+  toast('✅ '+el.querySelector('.design-opt-label').textContent);
 }
 
-function updatePhone(){
-  const primary=document.getElementById('dc-primary')?.value||document.getElementById('nav-bg')?.value||'#1a0a00';
-  const gold=document.getElementById('dc-gold')?.value||document.getElementById('app-color')?.value||'#d4a94a';
-  ['ph-topbar','ph-topbar2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.background=primary;});
-  document.querySelectorAll('.ph-cat.active').forEach(el=>{el.style.background=primary;el.style.color=gold;});
-  document.querySelectorAll('.ph-prod-price').forEach(el=>{el.style.color=gold;});
-}
-
-function selectDesign(el, type){ el.closest('.design-grid').querySelectorAll('.design-option').forEach(o=>o.classList.remove('active')); el.classList.add('active'); toast('✅ تم اختيار التصميم: '+el.querySelector('.design-option-label').textContent); }
-function saveDesign(){toast('✅ تم حفظ إعدادات التصميم');}
-function savePage(){toast('✅ تم حفظ إعدادات الصفحة');}
-function prevLogin(){
-  document.getElementById('lp-prev-title').textContent=document.getElementById('lp-title').value;
-  document.getElementById('lp-prev-sub').textContent=document.getElementById('lp-sub').value;
-  document.getElementById('lp-prev-btn').textContent=document.getElementById('lp-btn').value;
-  document.getElementById('lp-prev-emoji').textContent=document.getElementById('lp-emoji').value;
-}
+// PASSWORD
 function changePwd(){const a=document.getElementById('lp-new').value,b=document.getElementById('lp-conf').value;if(!a){toast('⚠️ أدخل كلمة مرور');return;}if(a!==b){toast('❌ كلمات المرور غير متطابقة');return;}toast('✅ تم تغيير كلمة المرور');}
 </script>
 </body>
