@@ -9,9 +9,15 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const { type, page = '1', id } = req.query;
+  const { type, page = '1', id, cursor } = req.query;
 
   try {
+    if (type === 'debug') {
+      const r = await fetch(SALLA_API + '/products?per_page=3&format=light', { headers });
+      const text = await r.text();
+      return res.status(200).send(text);
+    }
+
     if (type === 'categories') {
       const r = await fetch(SALLA_API + '/categories?per_page=50', { headers });
       const d = await r.json();
@@ -34,7 +40,10 @@ module.exports = async (req, res) => {
     }
 
     if (type === 'products') {
-      const r = await fetch(SALLA_API + '/products?status=sale&per_page=20&page=' + page + '&format=light', { headers });
+      let url = SALLA_API + '/products?status=sale&per_page=20&format=light';
+      if (cursor) url += '&cursor=' + encodeURIComponent(cursor);
+      else url += '&page=' + page;
+      const r = await fetch(url, { headers });
       const d = await r.json();
       const products = (d.data || []).map(p => ({
         id: p.id, name: p.name,
@@ -43,8 +52,9 @@ module.exports = async (req, res) => {
         thumbnail: p.urls && p.urls.thumbnail,
         status: p.status,
       }));
-      const hasMore = !!(d.cursor && d.cursor.next);
-      return res.status(200).json({ success: true, data: products, page: parseInt(page), hasMore });
+      const nextCursor = d.cursor && d.cursor.next ? d.cursor.next : null;
+      const hasMore = !!nextCursor;
+      return res.status(200).json({ success: true, data: products, page: parseInt(page), hasMore, nextCursor });
     }
 
     res.status(400).json({ success: false, error: 'Invalid type' });
