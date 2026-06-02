@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const TOKEN = '6kPyYpYrKGVBrctBRWvZYwAkpxxf7DClQOf95yV8FHvduJnEU1sQ3';
+const TOKEN = process.env.SALLA_TOKEN;
 const SALLA_API = 'https://api.salla.dev/admin/v2';
 const headers = { 'Authorization': 'Bearer ' + TOKEN, 'Accept': 'application/json' };
 
