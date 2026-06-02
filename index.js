@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
     }
 
     if (type === 'products') {
-      const r = await fetch(SALLA_API + '/products?per_page=20&page=' + page, { headers });
+      const r = await fetch(SALLA_API + '/products?status=sale&per_page=20&page=' + page + '&format=light', { headers });
       const d = await r.json();
       const products = (d.data || []).map(p => ({
         id: p.id, name: p.name,
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
         thumbnail: p.urls && p.urls.thumbnail,
         status: p.status,
       }));
-      const hasMore = !!(d.pagination && d.pagination.totalPages > parseInt(page));
+      const hasMore = !!(d.cursor && d.cursor.next);
       return res.status(200).json({ success: true, data: products, page: parseInt(page), hasMore });
     }
 
