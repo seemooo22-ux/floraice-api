@@ -1,10 +1,6 @@
-const TOKEN = process.env.SALLA_TOKEN || '6kPyYpYrKGVBrctBRWvZYwAkpxxf7DClQOf95yV8FHvduJnEU1sQ3';
+const TOKEN = '6kPyYpYrKGVBrctBRWvZYwAkpxxf7DClQOf95yV8FHvduJnEU1sQ3';
 const SALLA_API = 'https://api.salla.dev/admin/v2';
-
-const headers = {
-  'Authorization': `Bearer ${TOKEN}`,
-  'Accept': 'application/json',
-};
+const headers = { 'Authorization': ⁠ Bearer ${TOKEN} ⁠, 'Accept': 'application/json' };
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,14 +12,14 @@ module.exports = async (req, res) => {
 
   try {
     if (type === 'categories') {
-      const r = await fetch(`${SALLA_API}/categories?per_page=50`, { headers });
+      const r = await fetch(⁠ ${SALLA_API}/categories?per_page=50 ⁠, { headers });
       const d = await r.json();
       const cats = (d.data || []).map(c => ({ id: c.id, name: c.name }));
       return res.status(200).json({ success: true, data: cats });
     }
 
     if (type === 'product' && id) {
-      const r = await fetch(`${SALLA_API}/products/${id}`, { headers });
+      const r = await fetch(⁠ ${SALLA_API}/products/${id} ⁠, { headers });
       const d = await r.json();
       const p = d.data;
       return res.status(200).json({ success: true, data: {
@@ -37,11 +33,10 @@ module.exports = async (req, res) => {
     }
 
     if (type === 'products') {
-      const r = await fetch(`${SALLA_API}/products?status=sale&per_page=20&page=${page}&format=light`, { headers });
+      const r = await fetch(⁠ ${SALLA_API}/products?status=sale&per_page=20&page=${page}&format=light ⁠, { headers });
       const d = await r.json();
       const products = (d.data || []).map(p => ({
-        id: p.id,
-        name: p.name,
+        id: p.id, name: p.name,
         price: p.prices?.price,
         sale_price: p.prices?.sale_price,
         thumbnail: p.urls?.thumbnail,
